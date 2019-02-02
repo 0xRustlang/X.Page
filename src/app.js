@@ -11,7 +11,6 @@ import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-// import 'flag-icon-css/css/flag-icon.css'
 
 library.add(faCopy, faPaperPlane, faCheck);
 
