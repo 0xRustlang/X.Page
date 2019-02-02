@@ -21,10 +21,15 @@ module.exports = {
             {
                 test: /\.vue$/,
                 use: 'vue-loader'
+            },
+            {
+                test: /\.svg$/,
+                loader: 'svg-url-loader'
             }
         ]
     },
     resolve: {
+        extensions: ['*', '.js', '.vue', '.json'],
         alias: {
             '@': resolve('src'),
             'vue$': 'vue/dist/vue.js'

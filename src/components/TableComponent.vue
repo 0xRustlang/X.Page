@@ -2,10 +2,14 @@
     <b-container fluid>
         <b-table :sort-by.sync="sortBy"
                  :sort-desc.sync="sortDesc"
+                 :busy.sync="items.length === 0"
                  :items="items"
                  :fields="fields"
                  :current-page="currentPage"
                  :per-page="perPage">
+            <template slot="country" slot-scope="data">
+                <flag :iso="data.item.iso_code.toLowerCase()" :squared="false"></flag> {{ data.item.country }}
+            </template>
             <template slot="export" slot-scope="data">
                 <b-button variant="light" v-clipboard:copy="`${data.item.server}:${data.item.port}`">
                     <font-awesome-icon icon="copy"></font-awesome-icon>
@@ -41,6 +45,11 @@
                 sortBy: 'protocol',
                 sortDesc: true,
                 fields: [
+                    {
+                        key: 'country',
+                        sortable: true,
+                        label: 'Страна'
+                    },
                     {
                         key: 'server',
                         label: 'IP-адрес'
