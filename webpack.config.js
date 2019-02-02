@@ -25,7 +25,23 @@ module.exports = {
             {
                 test: /\.svg$/,
                 loader: 'svg-url-loader'
-            }
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'vue-style-loader',
+                    'css-loader',
+                    {
+                        loader: 'sass-loader',
+                        options: {
+                            data: '@import "variables";',
+                            includePaths: [
+                                resolve('src', 'assets')
+                            ]
+                        }
+                    }
+                ]
+            },
         ]
     },
     resolve: {

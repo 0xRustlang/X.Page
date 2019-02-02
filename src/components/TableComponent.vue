@@ -6,7 +6,8 @@
                  :items="items"
                  :fields="fields"
                  :current-page="currentPage"
-                 :per-page="perPage">
+                 :per-page="perPage"
+                 id="proxy-table">
             <template slot="country" slot-scope="data">
                 <flag :iso="data.item.isoCode" :squared="false"></flag>
                 {{ data.item.country }}
@@ -43,9 +44,6 @@
     import * as URI from 'urijs'
 
     export default {
-        metaInfo: {
-            title: 'Прокси для Телеграм'
-        },
         name: 'TableComponent',
         data() {
             return {
@@ -126,3 +124,14 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    .table {
+        td, th {
+            vertical-align: middle;
+            span {
+                vertical-align: middle;
+            }
+        }
+    }
+</style>
