@@ -13,15 +13,12 @@
                 {{ data.item.country }}
             </template>
             <template slot="export" slot-scope="data">
-                <b-button variant="light" v-clipboard:copy="`${data.item.server}:${data.item.port}`">
-                    <font-awesome-icon icon="copy"></font-awesome-icon>
-                </b-button>
+                <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
                 <a :href="data.item.uri"
                    target="_blank"
                    class="btn btn-primary"
                    variant="primary"
-                   v-if="data.item.protocol.startsWith('SOCKS')"
-                   role="button">
+                   v-if="data.item.protocol.startsWith('SOCKS')">
                     <font-awesome-icon icon="paper-plane"></font-awesome-icon>
                 </a>
             </template>
@@ -40,9 +37,14 @@
 </template>
 
 <script>
+    import CopyButton from "@/components/CopyButtonComponent.vue";
+
     export default {
         name: 'TableComponent',
         props: ['items'],
+        components: {
+            CopyButton
+        },
         data() {
             return {
                 sortBy: 'protocol',
@@ -51,34 +53,34 @@
                     {
                         key: 'country',
                         sortable: true,
-                        label: 'Страна',
+                        label: 'Country',
                         class: 'align-middle'
                     },
                     {
                         key: 'server',
-                        label: 'IP-адрес',
+                        label: 'IP address',
                         class: 'align-middle'
                     },
                     {
                         key: 'port',
-                        label: 'Порт',
+                        label: 'Port',
                         class: 'align-middle'
                     },
                     {
                         key: 'protocol',
                         sortable: true,
-                        label: 'Протокол',
+                        label: 'Protocol',
                         class: 'align-middle'
                     },
                     {
                         key: 'pingTimeMs',
                         sortable: true,
-                        label: 'Пинг (ms)',
+                        label: 'Ping (ms)',
                         class: 'align-middle'
                     },
                     {
                         key: 'export',
-                        label: 'Экспорт',
+                        label: 'Export',
                         class: 'align-middle'
                     }
                 ],

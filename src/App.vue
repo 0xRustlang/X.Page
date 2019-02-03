@@ -8,7 +8,16 @@
     export default {
         name: 'App',
         metaInfo: {
-            titleTemplate: '%s - FireX Proxy'
+            titleTemplate: '%s - FireX Proxy',
+            meta: [
+                {
+                    charset: 'utf-8'
+                },
+                {
+                    name: 'keywords',
+                    content: 'прокси для телеграма, прокси, proxy, proxies, telegram, http proxy, socks5 proxy, socks5'
+                }
+            ]
         }
     }
 </script>
@@ -43,7 +52,7 @@
         }
         &:after,
         &:before {
-            content: "";
+            content: '';
             display: block;
             position: absolute;
             width: 2px;
@@ -52,5 +61,25 @@
             top: 65%;
             right: 10px;
         }
+    }
+    .multiselect__option.multiselect__option--highlight:not(.multiselect__option--selected) {
+        background: #007bff;
+        &:after {
+            background: #007bff;
+        }
+    }
+
+    .multiselect__tag-icon {
+        background: #007bff;
+        &:hover {
+            background: rgba(0, 0, 0, 0.2);
+        }
+        &:after {
+            color: rgba(0, 0, 0, 0.4);
+        }
+    }
+
+    .multiselect__tag {
+        background: #007bff;
     }
 </style>

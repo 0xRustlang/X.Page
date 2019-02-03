@@ -1,6 +1,6 @@
 <template>
     <multiselect v-model="selectedCountries"
-                 placeholder="Страна..."
+                 placeholder="Country..."
                  :options="countryOptions"
                  track-by="country"
                  label="country"
