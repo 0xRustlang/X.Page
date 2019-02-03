@@ -1,3 +1,7 @@
+import 'vue-multiselect/dist/vue-multiselect.min.css'
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
 import Vue from 'vue'
 import App from './App.vue'
 import BootstrapVue from 'bootstrap-vue'
@@ -8,9 +12,6 @@ import router from './router'
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCopy, faPaperPlane, faCheck, faShieldAlt } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-
-import 'bootstrap/dist/css/bootstrap.css'
-import 'bootstrap-vue/dist/bootstrap-vue.css'
 
 library.add(faCopy, faPaperPlane, faCheck, faShieldAlt);
 

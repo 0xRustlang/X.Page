@@ -29,7 +29,7 @@
         <b-row>
             <b-col md="6" class="my-1">
                 <b-pagination
-                        :total-rows="totalRows"
+                        :total-rows="items.length"
                         :per-page="perPage"
                         v-model="currentPage"
                         class="my-0">
@@ -40,11 +40,9 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import * as URI from 'urijs'
-
     export default {
         name: 'TableComponent',
+        props: ['items'],
         data() {
             return {
                 sortBy: 'protocol',
@@ -53,84 +51,51 @@
                     {
                         key: 'country',
                         sortable: true,
-                        label: 'Страна'
+                        label: 'Страна',
+                        class: 'align-middle'
                     },
                     {
                         key: 'server',
-                        label: 'IP-адрес'
+                        label: 'IP-адрес',
+                        class: 'align-middle'
                     },
                     {
                         key: 'port',
-                        label: 'Порт'
+                        label: 'Порт',
+                        class: 'align-middle'
                     },
                     {
                         key: 'protocol',
                         sortable: true,
-                        label: 'Протокол'
+                        label: 'Протокол',
+                        class: 'align-middle'
                     },
                     {
                         key: 'pingTimeMs',
                         sortable: true,
-                        label: 'Пинг (ms)'
+                        label: 'Пинг (ms)',
+                        class: 'align-middle'
                     },
                     {
                         key: 'export',
-                        label: 'Экспорт'
+                        label: 'Экспорт',
+                        class: 'align-middle'
                     }
                 ],
                 currentPage: 1,
-                perPage: 50,
-                totalRows: 0,
-                items: []
+                perPage: 50
             }
-        },
-        mounted() {
-            axios
-                .get('https://api.firexproxy.com/v1/proxy')
-                .then(response => response.data)
-                .then(response => {
-                    this.totalRows = response.length;
-                    this.items = response
-                        .filter(item => {
-                            const { iso_code: isoCode } = item;
-
-                            return isoCode
-                        })
-                        .map(item => {
-                            const {
-                                server,
-                                port,
-                                iso_code: isoCode,
-                                country,
-                                protocol,
-                                ping_time_ms: pingTimeMs
-                            } = item;
-
-                            return {
-                                isoCode: isoCode.toLowerCase(),
-                                server: server,
-                                port: port,
-                                country: country,
-                                protocol: protocol,
-                                pingTimeMs: pingTimeMs,
-                                uri: URI('tg://socks')
-                                    .query({
-                                        server: server,
-                                        port: port
-                                    })
-                            };
-                        });
-                });
         }
     }
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss">
     .table {
-        td, th {
-            vertical-align: middle;
-            span {
-                vertical-align: middle;
+        tr {
+            &:first-of-type {
+                th {
+                    border-top: none;
+                }
             }
         }
     }
