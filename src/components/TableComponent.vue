@@ -6,21 +6,19 @@
                  :items="items"
                  :fields="fields"
                  :current-page="currentPage"
-                 :per-page="perPage">
+                 :per-page="perPage"
+                 id="proxy-table">
             <template slot="country" slot-scope="data">
                 <flag :iso="data.item.isoCode" :squared="false"></flag>
                 {{ data.item.country }}
             </template>
             <template slot="export" slot-scope="data">
-                <b-button variant="light" v-clipboard:copy="`${data.item.server}:${data.item.port}`">
-                    <font-awesome-icon icon="copy"></font-awesome-icon>
-                </b-button>
+                <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
                 <a :href="data.item.uri"
                    target="_blank"
                    class="btn btn-primary"
                    variant="primary"
-                   v-if="data.item.protocol.startsWith('SOCKS')"
-                   role="button">
+                   v-if="data.item.protocol.startsWith('SOCKS')">
                     <font-awesome-icon icon="paper-plane"></font-awesome-icon>
                 </a>
             </template>
@@ -28,7 +26,7 @@
         <b-row>
             <b-col md="6" class="my-1">
                 <b-pagination
-                        :total-rows="totalRows"
+                        :total-rows="items.length"
                         :per-page="perPage"
                         v-model="currentPage"
                         class="my-0">
@@ -39,14 +37,14 @@
 </template>
 
 <script>
-    import axios from 'axios'
-    import * as URI from 'urijs'
+    import CopyButton from "@/components/CopyButtonComponent.vue";
 
     export default {
-        metaInfo: {
-            title: 'Прокси для Телеграм'
-        },
         name: 'TableComponent',
+        props: ['items'],
+        components: {
+            CopyButton
+        },
         data() {
             return {
                 sortBy: 'protocol',
@@ -55,74 +53,52 @@
                     {
                         key: 'country',
                         sortable: true,
-                        label: 'Страна'
+                        label: 'Country',
+                        class: 'align-middle'
                     },
                     {
                         key: 'server',
-                        label: 'IP-адрес'
+                        label: 'IP address',
+                        class: 'align-middle'
                     },
                     {
                         key: 'port',
-                        label: 'Порт'
+                        label: 'Port',
+                        class: 'align-middle'
                     },
                     {
                         key: 'protocol',
                         sortable: true,
-                        label: 'Протокол'
+                        label: 'Protocol',
+                        class: 'align-middle'
                     },
                     {
                         key: 'pingTimeMs',
                         sortable: true,
-                        label: 'Пинг (ms)'
+                        label: 'Ping (ms)',
+                        class: 'align-middle'
                     },
                     {
                         key: 'export',
-                        label: 'Экспорт'
+                        label: 'Export',
+                        class: 'align-middle'
                     }
                 ],
                 currentPage: 1,
-                perPage: 50,
-                totalRows: 0,
-                items: []
+                perPage: 50
             }
-        },
-        mounted() {
-            axios
-                .get('https://api.firexproxy.com/v1/proxy')
-                .then(response => response.data)
-                .then(response => {
-                    this.totalRows = response.length;
-                    this.items = response
-                        .filter(item => {
-                            const { iso_code: isoCode } = item;
-
-                            return isoCode
-                        })
-                        .map(item => {
-                            const {
-                                server,
-                                port,
-                                iso_code: isoCode,
-                                country,
-                                protocol,
-                                ping_time_ms: pingTimeMs
-                            } = item;
-
-                            return {
-                                isoCode: isoCode.toLowerCase(),
-                                server: server,
-                                port: port,
-                                country: country,
-                                protocol: protocol,
-                                pingTimeMs: pingTimeMs,
-                                uri: URI('tg://socks')
-                                    .query({
-                                        server: server,
-                                        port: port
-                                    })
-                            };
-                        });
-                });
         }
     }
 </script>
+
+<style lang="scss">
+    .table {
+        tr {
+            &:first-of-type {
+                th {
+                    border-top: none;
+                }
+            }
+        }
+    }
+</style>
