@@ -2,21 +2,21 @@ language: go
 
 go:
   - 1.8
-  
-env:
+
+before_install:
   - CGO_ENABLED=0
   - GOOS=linux
   - GOARCH=amd64
-
-before_install:
+  # environment variables
   - go get -t ./...
   - go get github.com/GeertJohan/go.rice/rice
-
-install:
   - . $HOME/.nvm/nvm.sh
   - nvm install stable
   - nvm use stable
+
+install:
   - npm install
 
 script:
+  - npm run build
   - rice embed-go
