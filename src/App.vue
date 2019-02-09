@@ -1,24 +1,10 @@
 <template>
-    <div id="app">
-        <router-view></router-view>
-    </div>
+    <div id="app"></div>
 </template>
 
 <script>
     export default {
-        name: 'App',
-        metaInfo: {
-            titleTemplate: '%s - FireX Proxy',
-            meta: [
-                {
-                    charset: 'utf-8'
-                },
-                {
-                    name: 'keywords',
-                    content: 'прокси для телеграма, прокси, proxy, proxies, telegram, http proxy, socks5 proxy, socks5'
-                }
-            ]
-        }
+        name: 'App'
     }
 </script>
 

@@ -7,7 +7,6 @@ import App from './App.vue'
 import BootstrapVue from 'bootstrap-vue'
 import VueClipboard from 'vue-clipboard2'
 import FlagIcon from 'vue-flag-icon'
-import router from './router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCopy, faPaperPlane, faCheck, faShieldAlt } from '@fortawesome/free-solid-svg-icons'
@@ -23,7 +22,6 @@ Vue.use(FlagIcon);
 
 new Vue({
     el: '#app',
-    router,
     components: {
         App
     },

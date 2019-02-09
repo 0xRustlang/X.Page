@@ -40,9 +40,6 @@
 
     export default {
         name: 'LandingComponent',
-        metaInfo: {
-            title: 'Прокси для Телеграм, список прокси'
-        },
         components: {
             FilterComponent,
             ProtocolFilterComponent,
