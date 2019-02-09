@@ -1,7 +1,7 @@
 <template>
-    <b-container fluid class="px-5 pt-3">
-        <b-row id="proxy">
-            <b-container fluid class="shadow p-3 mb-5 bg-white rounded" v-if="items.length">
+    <b-container fluid class="px-5 pt-3" v-if="items.length">
+        <b-row>
+            <b-container fluid class="shadow p-3 mb-3 bg-white rounded">
                 <b-row>
                     <b-col>
                         <filter-component :items="countries" v-model="selectedCountries"></filter-component>
@@ -10,7 +10,22 @@
                         <protocol-filter-component :items="selectedProtocols" v-model="selectedProtocols"></protocol-filter-component>
                     </b-col>
                 </b-row>
-                <table-component :items="items"></table-component>
+            </b-container>
+        </b-row>
+        <b-row>
+            <b-container fluid class="shadow p-3 mb-3 bg-white rounded">
+                <table-component :items="items" :per-page="perPage" :current-page="currentPage"></table-component>
+            </b-container>
+        </b-row>
+        <b-row>
+            <b-container fluid class="shadow p-3 bg-white rounded">
+                <b-form-select id="rows" v-model="perPage" :options="[25, 50, 100]" class="float-left"></b-form-select>
+                <b-pagination
+                        :total-rows="items.length"
+                        :per-page="perPage"
+                        v-model="currentPage"
+                        class="float-right m-0">
+                </b-pagination>
             </b-container>
         </b-row>
     </b-container>
@@ -37,6 +52,8 @@
             return {
                 predefinedItems: [],
                 items: [],
+                currentPage: 1,
+                perPage: 50,
                 selectedCountries: [],
                 selectedProtocols: [
                     'SOCKS5',
@@ -125,3 +142,9 @@
         }
     }
 </script>
+
+<style lang="scss" scoped>
+    #rows {
+        width: auto;
+    }
+</style>

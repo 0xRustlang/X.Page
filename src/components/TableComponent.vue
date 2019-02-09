@@ -23,16 +23,6 @@
                 </a>
             </template>
         </b-table>
-        <b-row>
-            <b-col md="6" class="my-1">
-                <b-pagination
-                        :total-rows="items.length"
-                        :per-page="perPage"
-                        v-model="currentPage"
-                        class="my-0">
-                </b-pagination>
-            </b-col>
-        </b-row>
     </b-container>
 </template>
 
@@ -41,7 +31,7 @@
 
     export default {
         name: 'TableComponent',
-        props: ['items'],
+        props: ['items', 'currentPage', 'perPage'],
         components: {
             CopyButton
         },
@@ -83,9 +73,7 @@
                         label: 'Export',
                         class: 'align-middle'
                     }
-                ],
-                currentPage: 1,
-                perPage: 50
+                ]
             }
         }
     }
