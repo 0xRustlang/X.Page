@@ -12,7 +12,11 @@ before_install:
   - go get -t ./...
   - go get github.com/GeertJohan/go.rice/rice
 
-install: true
+install:
+  - . $HOME/.nvm/nvm.sh
+  - nvm install stable
+  - nvm use stable
+  - npm install
 
 script:
   - rice embed-go
