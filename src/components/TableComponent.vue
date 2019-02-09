@@ -7,8 +7,8 @@
                  :fields="fields"
                  :current-page="currentPage"
                  :per-page="perPage"
-                 :responsive="true"
-                 id="proxy-table">
+                 id="proxy-table"
+                 responsive>
             <template slot="country" slot-scope="data">
                 <flag :iso="data.item.isoCode" :squared="false"></flag>
                 {{ data.item.country }}

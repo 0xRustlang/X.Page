@@ -7,7 +7,6 @@ before_install:
   - CGO_ENABLED=0
   - GOOS=linux
   - GOARCH=amd64
-  # environment variables
   - go get -t ./...
   - go get github.com/GeertJohan/go.rice/rice
   - . $HOME/.nvm/nvm.sh
