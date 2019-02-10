@@ -1,6 +1,6 @@
 'use strict';
 
-const { VueLoaderPlugin } = require('vue-loader');
+const {VueLoaderPlugin} = require('vue-loader');
 const path = require('path');
 const resolve = (...paths) => path.join(__dirname, ...paths);
 
@@ -34,7 +34,7 @@ module.exports = {
                     {
                         loader: 'sass-loader',
                         options: {
-                            data: '@import "variables";',
+                            data: '@import "main";',
                             includePaths: [
                                 resolve('src', 'assets')
                             ]

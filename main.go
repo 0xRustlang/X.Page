@@ -21,11 +21,16 @@ func main() {
 		t.Execute(w, nil)
 	})
 
+	r.Get("/checker", func(w http.ResponseWriter, r *http.Request) {
+		t, _ := template.New("checker").Parse(box.MustString("checker.tmpl"))
+		t.Execute(w, nil)
+	})
+
 	r.Get("/dist/*", func(w http.ResponseWriter, r *http.Request) {
 		http.StripPrefix("/dist/", http.FileServer(rice.MustFindBox("dist").HTTPBox())).ServeHTTP(w, r)
 	})
 
-	if err := http.ListenAndServe(":8080", r); err != nil {
+	if err := http.ListenAndServe(":8086", r); err != nil {
 		log.Fatal(err)
 	}
 }
