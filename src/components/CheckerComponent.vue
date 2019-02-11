@@ -221,7 +221,7 @@
                 this.$copyText(text);
             },
             connect() {
-                this.ws = new WebSocket('ws://localhost:8081');
+                this.ws = new WebSocket('wss://ws.firexproxy.com');
                 this.ws.onmessage = this.onReceive.bind(this);
                 this.ws.onclose = this.connect.bind(this);
             }
