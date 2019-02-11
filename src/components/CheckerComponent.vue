@@ -11,7 +11,7 @@
                         </b-button>
                     </b-col>
                     <b-col>
-                        <b-button variant="primary" @click="copyAlive()">Copy alive</b-button>
+                        <b-button variant="primary" @click="copyAlive()" class="float-right">Copy alive</b-button>
                     </b-col>
                 </b-form>
             </b-container>
@@ -32,7 +32,7 @@
                     </template>
                     <template slot="export" slot-scope="data">
                         <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
-                        <a :href="data.item.uri"
+                        <a :href="'tg://socks?server=${data.item.server}&port=${data.item.port}'"
                            target="_blank"
                            class="btn btn-primary"
                            variant="primary"
@@ -58,7 +58,6 @@
 </template>
 
 <script>
-    import * as URI from 'urijs'
     import CopyButton from "@/components/CopyButtonComponent.vue";
 
     export const MAX_QUEUE_SIZE = 20;
@@ -202,12 +201,7 @@
                                 pingTimeMs,
                                 isoCode,
                                 country,
-                                counter: this.proxies[index].counter,
-                                uri: URI('tg://socks')
-                                    .query({
-                                        server: server,
-                                        port: port
-                                    })
+                                counter: this.proxies[index].counter
                             });
                         }
                     });

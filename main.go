@@ -16,8 +16,8 @@ import (
 func main() {
 	var port int
 
-	flag.Parse()
 	flag.IntVar(&port, "port", 8080, "Port to run this service on")
+	flag.Parse()
 
 	box := rice.MustFindBox("resources").HTTPBox()
 

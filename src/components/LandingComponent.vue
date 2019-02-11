@@ -36,7 +36,6 @@
     import ProtocolFilterComponent from '@/components/ProtocolFilterComponent.vue'
     import TableComponent from '@/components/TableComponent.vue'
     import axios from 'axios'
-    import * as URI from 'urijs'
 
     export default {
         name: 'LandingComponent',
@@ -125,12 +124,7 @@
                                 port: port,
                                 country: country,
                                 protocol: protocol,
-                                pingTimeMs: pingTimeMs,
-                                uri: URI('tg://socks')
-                                    .query({
-                                        server: server,
-                                        port: port
-                                    })
+                                pingTimeMs: pingTimeMs
                             };
                         });
 

@@ -15,7 +15,7 @@
             </template>
             <template slot="export" slot-scope="data">
                 <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
-                <a :href="data.item.uri"
+                <a :href="'tg://socks?server=${data.item.server}&port=${data.item.port}'"
                    target="_blank"
                    class="btn btn-primary"
                    variant="primary"

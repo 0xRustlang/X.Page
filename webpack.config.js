@@ -1,11 +1,13 @@
 'use strict';
 
-const {VueLoaderPlugin} = require('vue-loader');
+const { VueLoaderPlugin } = require('vue-loader');
+const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
+
 const resolve = (...paths) => path.join(__dirname, ...paths);
 
 module.exports = {
-    mode: 'development',
+    mode: 'production',
     entry: [
         './src/app.js'
     ],
@@ -24,7 +26,11 @@ module.exports = {
             },
             {
                 test: /\.svg$/,
-                loader: 'svg-url-loader'
+                loader: 'svg-url-loader',
+                options: {
+                    limit: 10 * 1024,
+                    noquotes: true,
+                }
             },
             {
                 test: /\.scss$/,
@@ -52,6 +58,7 @@ module.exports = {
         }
     },
     plugins: [
-        new VueLoaderPlugin()
+        new VueLoaderPlugin(),
+        new CompressionPlugin()
     ]
 };
