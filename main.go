@@ -1,9 +1,12 @@
 package main
 
 import (
+	"flag"
 	"html/template"
 	"log"
+	"net"
 	"net/http"
+	"strconv"
 
 	"github.com/GeertJohan/go.rice"
 	"github.com/go-chi/chi"
@@ -11,6 +14,11 @@ import (
 )
 
 func main() {
+	var port int
+
+	flag.Parse()
+	flag.IntVar(&port, "port", 8080, "Port to run this service on")
+
 	box := rice.MustFindBox("resources").HTTPBox()
 
 	r := chi.NewRouter()
@@ -21,8 +29,8 @@ func main() {
 		t.Execute(w, nil)
 	})
 
-	r.Get("/checker", func(w http.ResponseWriter, r *http.Request) {
-		t, _ := template.New("checker").Parse(box.MustString("checker.tmpl"))
+	r.Get("/proxy-checker", func(w http.ResponseWriter, r *http.Request) {
+		t, _ := template.New("proxy-checker").Parse(box.MustString("proxy-checker.tmpl"))
 		t.Execute(w, nil)
 	})
 
@@ -30,7 +38,7 @@ func main() {
 		http.StripPrefix("/dist/", http.FileServer(rice.MustFindBox("dist").HTTPBox())).ServeHTTP(w, r)
 	})
 
-	if err := http.ListenAndServe(":8086", r); err != nil {
+	if err := http.ListenAndServe(net.JoinHostPort("0.0.0.0", strconv.Itoa(port)), r); err != nil {
 		log.Fatal(err)
 	}
 }

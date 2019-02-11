@@ -4,13 +4,13 @@
             <b-container fluid class="shadow p-3 mb-3 bg-white rounded">
                 <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)">
                     <b-col>
-                        <b-form-input :state="validServer" v-model.trim="server" type="text" placeholder="127.0.0.1:8080"></b-form-input>
+                        <b-form-input :state="valid" v-model.trim="server" type="text"
+                                      placeholder="127.0.0.1:8080"></b-form-input>
                         <b-button variant="primary" class="ml-1" type="submit">
                             <font-awesome-icon icon="plus-square"></font-awesome-icon>
                         </b-button>
                     </b-col>
                     <b-col>
-                        <b-button variant="primary" @click="submit()">Check</b-button>
                         <b-button variant="primary" @click="copyAlive()">Copy alive</b-button>
                     </b-col>
                 </b-form>
@@ -23,14 +23,14 @@
                          :fields="fields"
                          id="proxy-table"
                          responsive>
+                    <template slot="index" slot-scope="data">
+                        {{ data.index + 1 }}
+                    </template>
                     <template slot="country" slot-scope="data">
                         <flag :iso="data.item.isoCode" :squared="false"></flag>
                         {{ data.item.country }}
                     </template>
                     <template slot="export" slot-scope="data">
-                        <b-button variant="danger" @click="onRemove(data.index)" v-if="state === 'init'">
-                            <font-awesome-icon icon="trash"></font-awesome-icon>
-                        </b-button>
                         <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
                         <a :href="data.item.uri"
                            target="_blank"
@@ -41,9 +41,15 @@
                         </a>
                     </template>
                     <template slot="status" slot-scope="data">
-                        <b-badge variant="success" v-if="data.item.lossRatio !== 1">Works</b-badge>
-                        <b-badge variant="danger" v-else-if="data.item.lossRatio === 1 && state === 'finished'">Dead</b-badge>
-                        <b-badge variant="warning" v-else-if="data.item.lossRatio === 1 && state === 'progress'">Checking</b-badge>
+                        <b-badge variant="success" v-if="data.item.lossRatio < 1">
+                            Available
+                        </b-badge>
+                        <b-badge variant="danger" v-else-if="data.item.lossRatio === 1 && data.item.counter === 2">
+                            Unavailable
+                        </b-badge>
+                        <b-badge variant="warning" v-else>
+                            Checking
+                        </b-badge>
                     </template>
                 </b-table>
             </b-container>
@@ -55,19 +61,23 @@
     import * as URI from 'urijs'
     import CopyButton from "@/components/CopyButtonComponent.vue";
 
+    export const MAX_QUEUE_SIZE = 20;
+
     export default {
+        name: 'CheckerComponent',
         components: {
             CopyButton
         },
-        name: 'CheckerComponent',
         data() {
             return {
                 server: '',
                 proxies: [],
-                receivedPackets: 0,
-                state: 'init',
-                expectedPackets: 0,
                 fields: [
+                    {
+                        key: 'index',
+                        label: '#',
+                        class: 'align-middle'
+                    },
                     {
                         key: 'status',
                         sortable: true,
@@ -111,17 +121,24 @@
             }
         },
         computed: {
-            validServer() {
-                return  this.server.length === 0 || this.checkIP(this.server);
+            valid() {
+                return this.server.length === 0 || this.checkServer(this.server);
             }
         },
         methods: {
             onPaste(e) {
-                const text = (e.originalEvent || e).clipboardData.getData('text/plain');
+                const data = (e.originalEvent || e)
+                    .clipboardData
+                    .getData('text/plain')
+                    .split('\n')
+                    .slice(0, this.availableQueueSize())
+                    .filter(this.checkServer.bind(this))
+                    .map(v => this.create(...v.split(':')));
 
-                text.split('\n').forEach(this.onAdd.bind(this));
+                this.proxies.push(...data);
+                this.ws.send(JSON.stringify(data));
             },
-            checkIP(server) {
+            checkServer(server) {
                 return this.isUnique(server) && /^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5]):[0-9]+$/.test(server);
             },
             isUnique(newServer) {
@@ -130,53 +147,34 @@
                 return !this.proxies.some(proxy => proxy.server === server && proxy.port === port);
             },
             onAdd(newServer) {
-                if (newServer.length === 0 || !this.checkIP(newServer) || this.proxies.length === 20) {
+                if (newServer.length === 0 || !this.checkServer(newServer) || this.proxies.length === MAX_QUEUE_SIZE) {
                     return;
                 }
 
-                const [server, port] = newServer.split(':');
+                const proxy = this.create(...newServer.split(':'));
 
-                this.proxies.push({
+                this.server = '';
+                this.proxies.push(proxy);
+                this.ws.send(JSON.stringify([proxy]));
+            },
+            availableQueueSize() {
+                return MAX_QUEUE_SIZE - this.proxies.filter(v => v.counter < 2).length;
+            },
+            create(server, port) {
+                return {
                     server,
                     port,
                     country: '-',
                     protocol: '-',
                     pingTimeMs: '-',
-                    lossRatio: 1
-                });
-
-                this.server = '';
-                this.state = 'init';
-            },
-            onRemove(index) {
-                this.proxies.splice(index, 1);
-            },
-            submit() {
-                if (this.proxies.length === 0) {
-                    return;
+                    lossRatio: 1,
+                    counter: 0
                 }
-
-                this.proxies = this.proxies.map(proxy => ({
-                    server: proxy.server,
-                    port: proxy.port,
-                    country: '-',
-                    protocol: '-',
-                    pingTimeMs: '-',
-                    lossRatio: 1
-                }));
-
-                this.receivedPackets = 0;
-                this.state = 'progress';
-                this.expectedPackets = this.proxies.length * 2;
-
-                this.ws.send(JSON.stringify(this.proxies));
             },
             onReceive({ data }) {
                 data
                     .split('\n')
                     .forEach(line => {
-                        const newServer = JSON.parse(line);
-
                         const {
                             server,
                             port,
@@ -185,13 +183,15 @@
                             ping_time_ms: pingTimeMs,
                             iso_code: isoCode,
                             country
-                        } = newServer;
+                        } = JSON.parse(line);
 
                         const index = this.proxies.findIndex(proxy => proxy.server === server && proxy.port === port);
 
                         if (index === -1) {
                             return;
                         }
+
+                        this.proxies[index].counter++;
 
                         if (lossRatio < 1) {
                             this.proxies.splice(index, 1, {
@@ -202,6 +202,7 @@
                                 pingTimeMs,
                                 isoCode,
                                 country,
+                                counter: this.proxies[index].counter,
                                 uri: URI('tg://socks')
                                     .query({
                                         server: server,
@@ -209,17 +210,11 @@
                                     })
                             });
                         }
-
-                        this.receivedPackets++;
                     });
-
-                if (this.expectedPackets === this.receivedPackets) {
-                    this.state = 'finished';
-                }
             },
             copyAlive() {
                 const text = this.proxies
-                    .filter(proxy => proxy.lossRatio !== 1)
+                    .filter(proxy => proxy.lossRatio < 1)
                     .map(proxy => `${proxy.server}:${proxy.port}`)
                     .join('\n');
 

@@ -8,13 +8,13 @@ import VueClipboard from 'vue-clipboard2'
 import FlagIcon from 'vue-flag-icon'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
-import { faCopy, faPaperPlane, faCheck, faShieldAlt, faTrash, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
+import { faCopy, faPaperPlane, faCheck, faShieldAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 import LandingComponent from "@/components/LandingComponent.vue";
 import CheckerComponent from "@/components/CheckerComponent.vue";
 
-library.add(faCopy, faPaperPlane, faCheck, faShieldAlt, faTrash, faPlusSquare);
+library.add(faCopy, faPaperPlane, faCheck, faShieldAlt, faPlusSquare);
 
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
