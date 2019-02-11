@@ -1,6 +1,7 @@
 'use strict';
 
 const { VueLoaderPlugin } = require('vue-loader');
+const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 
@@ -11,6 +12,10 @@ module.exports = {
     entry: [
         './src/app.js'
     ],
+    output: {
+        path: resolve('dist'),
+        publicPath: "/dist/"
+    },
     module: {
         rules: [
             {
@@ -28,8 +33,10 @@ module.exports = {
                 test: /\.svg$/,
                 loader: 'svg-url-loader',
                 options: {
+                    fallback: 'file-loader',
                     limit: 10 * 1024,
                     noquotes: true,
+                    outputPath: 'images'
                 }
             },
             {
@@ -58,6 +65,7 @@ module.exports = {
         }
     },
     plugins: [
+        new CleanWebpackPlugin(['dist']),
         new VueLoaderPlugin(),
         new CompressionPlugin()
     ]
