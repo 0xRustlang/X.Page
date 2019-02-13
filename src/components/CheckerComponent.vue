@@ -1,23 +1,30 @@
 <template>
-    <b-container fluid class="px-5 pt-3">
-        <b-row>
-            <b-container fluid class="shadow p-3 mb-3 bg-white rounded">
-                <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)">
-                    <b-col>
-                        <b-form-input :state="valid" v-model.trim="server" type="text"
-                                      placeholder="127.0.0.1:8080"></b-form-input>
-                        <b-button variant="primary" class="ml-1" type="submit">
-                            <font-awesome-icon icon="plus-square"></font-awesome-icon>
-                        </b-button>
-                    </b-col>
-                    <b-col>
-                        <b-button variant="primary" @click="copyAlive()" class="float-right">Copy alive</b-button>
-                    </b-col>
-                </b-form>
-            </b-container>
-        </b-row>
-        <b-row>
-            <b-container fluid class="shadow p-3 mb-3 bg-white rounded">
+    <b-container fluid class="pt-3">
+        <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
+            <b-row>
+                <b-col>
+                    <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)">
+                        <b-input-group>
+                            <b-form-input :state="valid"
+                                          v-model.trim="server"
+                                          type="text"
+                                          placeholder="127.0.0.1:8080">
+                            </b-form-input>
+                            <b-input-group-append>
+                                <b-btn variant="primary" class="ml-1" type="submit">
+                                    <font-awesome-icon icon="plus-square"></font-awesome-icon>
+                                </b-btn>
+                            </b-input-group-append>
+                        </b-input-group>
+                    </b-form>
+                </b-col>
+                <b-col>
+                    <b-button variant="primary" @click="copyAlive()" class="float-right">Copy alive</b-button>
+                </b-col>
+            </b-row>
+        </b-container>
+        <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
+            <b-row>
                 <b-table :busy.sync="proxies.length === 0"
                          :items="proxies"
                          :fields="fields"
@@ -52,8 +59,8 @@
                         </b-badge>
                     </template>
                 </b-table>
-            </b-container>
-        </b-row>
+            </b-row>
+        </b-container>
     </b-container>
 </template>
 
