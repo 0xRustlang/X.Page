@@ -7,17 +7,14 @@
                  :fields="fields"
                  :current-page="currentPage"
                  :per-page="perPage"
-                 id="proxy-table"
                  responsive>
             <template slot="country" slot-scope="data">
-                <no-ssr>
-                    <flag :iso="data.item.isoCode" :squared="false"></flag>
-                </no-ssr>
+                <flag-icon-component :iso="data.item.isoCode"></flag-icon-component>
                 {{ data.item.country }}
             </template>
             <template slot="export" slot-scope="data">
                 <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
-                <a :href="'tg://socks?server=${data.item.server}&port=${data.item.port}'"
+                <a :href="`tg://socks?server=${data.item.server}&port=${data.item.port}`"
                    target="_blank"
                    class="btn btn-primary"
                    variant="primary"
@@ -31,11 +28,13 @@
 
 <script>
     import CopyButton from "@/components/CopyButtonComponent.vue"
+    import FlagIconComponent from "@/components/FlagIconComponent.vue"
 
     export default {
         name: 'TableComponent',
         props: ['items', 'currentPage', 'perPage'],
         components: {
+            FlagIconComponent,
             CopyButton
         },
         data() {
@@ -91,5 +90,9 @@
                 }
             }
         }
+    }
+
+    a.btn {
+        padding: 0.70rem 0.70rem;
     }
 </style>

@@ -4,7 +4,7 @@
             <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
             <b-collapse is-nav id="nav_collapse">
                 <b-navbar-nav>
-                    <b-nav-item to="/" active>Home</b-nav-item>
+                    <b-nav-item to="/" exact>Home</b-nav-item>
                     <b-nav-item to="/proxy-checker">Proxy Checker</b-nav-item>
                 </b-navbar-nav>
                 <!-- Right aligned nav items -->
@@ -26,6 +26,9 @@
 
 <script>
     export default {
-        name: 'App'
+        name: 'App',
+        metaInfo: {
+            titleTemplate: '%s - FireX Proxy'
+        }
     }
 </script>

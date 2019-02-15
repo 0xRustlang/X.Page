@@ -20,7 +20,6 @@ app.use('/dist', express.static(resolve('dist')));
 
 app.get('*', (req, res) => {
     const context = {
-        title: 'Прокси для Телеграм, список прокси',
         url: req.url
     };
 

@@ -1,6 +1,7 @@
 import 'vue-multiselect/dist/vue-multiselect.min.css'
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import '@fortawesome/fontawesome-svg-core/styles.css'
 
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
@@ -8,11 +9,13 @@ import VueClipboard from 'vue-clipboard2'
 import App from '@/App.vue'
 import router from '@/router'
 
-import { library } from '@fortawesome/fontawesome-svg-core'
+import { library, config } from '@fortawesome/fontawesome-svg-core'
 import { faCopy, faPaperPlane, faCheck, faShieldAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
 Vue.config.productionTip = false;
+
+config.autoAddCss = false;
 
 library.add(faCopy, faPaperPlane, faCheck, faShieldAlt, faPlusSquare);
 

@@ -28,7 +28,6 @@
                 <b-table :busy.sync="proxies.length === 0"
                          :items="proxies"
                          :fields="fields"
-                         id="proxy-table"
                          responsive>
                     <template slot="index" slot-scope="data">
                         {{ data.index + 1 }}
@@ -73,6 +72,9 @@
         name: 'CheckerComponent',
         components: {
             CopyButton
+        },
+        metaInfo: {
+            title: 'Проверка прокси серверов, прокси чекер'
         },
         data() {
             return {

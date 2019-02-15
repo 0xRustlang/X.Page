@@ -16,6 +16,7 @@ export default context => {
                 resolve(app);
             };
 
+            context.meta = app.$meta();
             router.push(context.url);
             router.onReady(onReady, reject);
         }

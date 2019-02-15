@@ -47,6 +47,9 @@
             ProtocolFilterComponent,
             TableComponent
         },
+        metaInfo: {
+            title: 'Прокси для Телеграм, список прокси'
+        },
         data() {
             return {
                 predefinedItems: [],
