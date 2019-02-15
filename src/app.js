@@ -5,14 +5,14 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import VueClipboard from 'vue-clipboard2'
-import FlagIcon from 'vue-flag-icon'
+import App from '@/App.vue'
+import router from '@/router'
 
 import { library } from '@fortawesome/fontawesome-svg-core'
 import { faCopy, faPaperPlane, faCheck, faShieldAlt, faPlusSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
 
-import LandingComponent from "@/components/LandingComponent.vue";
-import CheckerComponent from "@/components/CheckerComponent.vue";
+Vue.config.productionTip = false;
 
 library.add(faCopy, faPaperPlane, faCheck, faShieldAlt, faPlusSquare);
 
@@ -20,13 +20,12 @@ Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.use(BootstrapVue);
 Vue.use(VueClipboard);
-Vue.use(FlagIcon);
 
+export function createApp() {
+    const app = new Vue({
+        router,
+        render: h => h(App)
+    });
 
-new Vue({
-    el: '#app',
-    components: {
-        LandingComponent,
-        CheckerComponent
-    }
-});
+    return { app, router }
+}

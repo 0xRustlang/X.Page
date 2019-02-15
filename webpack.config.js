@@ -1,7 +1,6 @@
 'use strict';
 
 const { VueLoaderPlugin } = require('vue-loader');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
 const path = require('path');
 
@@ -9,9 +8,6 @@ const resolve = (...paths) => path.join(__dirname, ...paths);
 
 module.exports = {
     mode: 'production',
-    entry: [
-        './src/app.js'
-    ],
     output: {
         path: resolve('dist'),
         publicPath: "/dist/"
@@ -21,7 +17,7 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [
-                    'style-loader',
+                    'vue-style-loader',
                     'css-loader'
                 ]
             },
@@ -65,7 +61,6 @@ module.exports = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
         new VueLoaderPlugin(),
         new CompressionPlugin()
     ]

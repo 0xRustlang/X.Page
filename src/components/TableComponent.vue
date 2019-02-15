@@ -10,7 +10,9 @@
                  id="proxy-table"
                  responsive>
             <template slot="country" slot-scope="data">
-                <flag :iso="data.item.isoCode" :squared="false"></flag>
+                <no-ssr>
+                    <flag :iso="data.item.isoCode" :squared="false"></flag>
+                </no-ssr>
                 {{ data.item.country }}
             </template>
             <template slot="export" slot-scope="data">
@@ -28,7 +30,7 @@
 </template>
 
 <script>
-    import CopyButton from "@/components/CopyButtonComponent.vue";
+    import CopyButton from "@/components/CopyButtonComponent.vue"
 
     export default {
         name: 'TableComponent',

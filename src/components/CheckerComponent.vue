@@ -34,7 +34,7 @@
                         {{ data.index + 1 }}
                     </template>
                     <template slot="country" slot-scope="data">
-                        <flag :iso="data.item.isoCode" :squared="false"></flag>
+                        <!--<flag :iso="data.item.isoCode" :squared="false"></flag>-->
                         {{ data.item.country }}
                     </template>
                     <template slot="export" slot-scope="data">
@@ -65,7 +65,7 @@
 </template>
 
 <script>
-    import CopyButton from "@/components/CopyButtonComponent.vue";
+    import CopyButton from "@/components/CopyButtonComponent.vue"
 
     export const MAX_QUEUE_SIZE = 20;
 
