@@ -86,6 +86,6 @@
     .content {
         position: relative;
         margin-top: -60px;
-        z-index: 1;
+        z-index: 2;
     }
 </style>
