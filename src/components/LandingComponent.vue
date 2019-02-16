@@ -143,6 +143,11 @@
 <style lang="scss" scoped>
     #rows {
         width: auto;
+        -moz-appearance: none;
+        -webkit-appearance: none;
+        &::-ms-expand {
+            display: none;
+        }
     }
 
     .pagination {
