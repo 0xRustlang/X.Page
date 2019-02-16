@@ -8,7 +8,7 @@ module.exports = merge(baseConfig, {
         app: './src/entry-client.js',
         vendorStyles: [
             'vue-multiselect/dist/vue-multiselect.min.css',
-            'bootstrap/dist/css/bootstrap.css',
+            'bootstrap/scss/bootstrap.scss',
             'bootstrap-vue/dist/bootstrap-vue.css',
             '@fortawesome/fontawesome-svg-core/styles.css',
             'flag-icon-css/sass/flag-icon.scss'

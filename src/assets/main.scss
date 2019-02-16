@@ -1,5 +1,7 @@
+$primary: #554fe8;
+
 body {
-    background: whitesmoke;
+  background: whitesmoke;
 }
 
 .ps__scrollbar-y-rail {
@@ -41,15 +43,16 @@ body {
     right: 10px;
   }
 }
+
 .multiselect__option.multiselect__option--highlight:not(.multiselect__option--selected) {
-  background: #007bff;
+  background: $primary;
   &:after {
-    background: #007bff;
+    background: $primary;
   }
 }
 
 .multiselect__tag-icon {
-  background: #007bff;
+  background: $primary;
   &:hover {
     background: rgba(0, 0, 0, 0.2);
   }
@@ -59,6 +62,6 @@ body {
 }
 
 .multiselect__tag {
-  background: #007bff;
+  background: $primary;
   border-radius: 0;
 }

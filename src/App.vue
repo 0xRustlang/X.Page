@@ -66,9 +66,9 @@
             display: block;
             left: 0;
             top: 0;
-            background: rgba(0, 123, 255, 0.88);
-            background: linear-gradient(45deg, rgba(0, 123, 255, 0.88), rgba(0, 123, 255, 0.31));
-            background: -webkit-linear-gradient(135deg, rgba(0, 123, 255, 0.88), rgba(0, 123, 255, 0.31));
+            background: rgba($primary, 0.88);
+            background: linear-gradient(to bottom, rgba($primary, 1.0), rgba($primary, 0.31));
+            background: -webkit-linear-gradient(to bottom, rgba($primary, 1.0), rgba($primary, 0.31));
         }
         .container {
             position: relative;
