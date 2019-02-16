@@ -33,7 +33,7 @@
                         {{ data.index + 1 }}
                     </template>
                     <template slot="country" slot-scope="data">
-                        <!--<flag :iso="data.item.isoCode" :squared="false"></flag>-->
+                        <flag-icon-component :iso="data.item.isoCode"></flag-icon-component>
                         {{ data.item.country }}
                     </template>
                     <template slot="export" slot-scope="data">

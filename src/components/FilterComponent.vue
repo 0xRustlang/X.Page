@@ -14,15 +14,23 @@
                  @mousedown.prevent.stop="clearAll()">
             </div>
         </template>
+        <template slot="option" slot-scope="props">
+            <flag-icon-component :iso="props.option.isoCode"></flag-icon-component>
+            <div class="option__desc">
+                <span class="option__title">{{ props.option.country }}</span>
+            </div>
+        </template>
     </multiselect>
 </template>
 
 <script>
     import Multiselect from 'vue-multiselect'
+    import FlagIconComponent from "./FlagIconComponent.vue";
 
     export default {
         name: 'FilterComponent',
         components: {
+            FlagIconComponent,
             Multiselect
         },
         props: ['value', 'items'],
@@ -44,6 +52,16 @@
             selectedCountries: function (val) {
                 this.$emit('input', val);
             }
+        },
+        mounted() {
+            this.countryOptions = this.countryOptions.sort();
         }
     }
 </script>
+
+<style lang="css">
+    .option__desc {
+        display: inline-block;
+        vertical-align: middle;
+    }
+</style>

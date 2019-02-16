@@ -13,6 +13,8 @@
     }
 </script>
 
-<style lang="scss">
-    @import "~flag-icon-css/sass/flag-icon.scss";
+<style>
+    .flag-icon {
+        vertical-align: middle;
+    }
 </style>

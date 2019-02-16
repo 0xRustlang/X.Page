@@ -4,7 +4,16 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 const baseConfig = require('./webpack.config');
 
 module.exports = merge(baseConfig, {
-    entry: './src/entry-client.js',
+    entry: {
+        app: './src/entry-client.js',
+        vendorStyles: [
+            'vue-multiselect/dist/vue-multiselect.min.css',
+            'bootstrap/dist/css/bootstrap.css',
+            'bootstrap-vue/dist/bootstrap-vue.css',
+            '@fortawesome/fontawesome-svg-core/styles.css',
+            'flag-icon-css/sass/flag-icon.scss'
+        ]
+    },
     plugins: [
         new CleanWebpackPlugin(["dist"]),
         new VueSSRClientPlugin()
