@@ -28,13 +28,12 @@
                 <b-table :busy.sync="proxies.length === 0"
                          :items="proxies"
                          :fields="fields"
-                         id="proxy-table"
                          responsive>
                     <template slot="index" slot-scope="data">
                         {{ data.index + 1 }}
                     </template>
                     <template slot="country" slot-scope="data">
-                        <flag :iso="data.item.isoCode" :squared="false"></flag>
+                        <flag-icon-component :iso="data.item.isoCode"></flag-icon-component>
                         {{ data.item.country }}
                     </template>
                     <template slot="export" slot-scope="data">
@@ -65,7 +64,7 @@
 </template>
 
 <script>
-    import CopyButton from "@/components/CopyButtonComponent.vue";
+    import CopyButton from "@/components/CopyButtonComponent.vue"
 
     export const MAX_QUEUE_SIZE = 20;
 
@@ -73,6 +72,9 @@
         name: 'CheckerComponent',
         components: {
             CopyButton
+        },
+        metaInfo: {
+            title: 'Проверка прокси серверов, прокси чекер'
         },
         data() {
             return {

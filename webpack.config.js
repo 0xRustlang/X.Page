@@ -1,17 +1,14 @@
 'use strict';
 
 const { VueLoaderPlugin } = require('vue-loader');
-const CleanWebpackPlugin = require('clean-webpack-plugin');
 const CompressionPlugin = require('compression-webpack-plugin');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const path = require('path');
 
 const resolve = (...paths) => path.join(__dirname, ...paths);
 
 module.exports = {
     mode: 'production',
-    entry: [
-        './src/app.js'
-    ],
     output: {
         path: resolve('dist'),
         publicPath: "/dist/"
@@ -20,14 +17,45 @@ module.exports = {
         rules: [
             {
                 test: /\.css$/,
-                use: [
-                    'style-loader',
-                    'css-loader'
-                ]
+                use: ExtractTextPlugin.extract({
+                    use: 'css-loader',
+                    fallback: 'vue-style-loader'
+                })
+            },
+            {
+                test: /\.(png|jpg|gif)$/,
+                loader: 'url-loader',
+                options: {
+                    limit: 10000,
+                    name: '[name].[ext]?[hash]'
+                }
             },
             {
                 test: /\.vue$/,
-                use: 'vue-loader'
+                loader: 'vue-loader',
+                options: {
+                    loaders: {
+                        scss: ExtractTextPlugin.extract({
+                            use: [
+                                'css-loader',
+                                {
+                                    loader: 'sass-loader',
+                                    options: {
+                                        data: '@import "main";',
+                                        includePaths: [
+                                            resolve('src', 'assets')
+                                        ]
+                                    }
+                                }
+                            ],
+                            fallback: 'vue-style-loader'
+                        }),
+                        css: ExtractTextPlugin.extract({
+                            use: 'css-loader',
+                            fallback: 'vue-style-loader'
+                        })
+                    }
+                }
             },
             {
                 test: /\.svg$/,
@@ -41,19 +69,21 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [
-                    'vue-style-loader',
-                    'css-loader',
-                    {
-                        loader: 'sass-loader',
-                        options: {
-                            data: '@import "main";',
-                            includePaths: [
-                                resolve('src', 'assets')
-                            ]
+                use: ExtractTextPlugin.extract({
+                    use: [
+                        'css-loader',
+                        {
+                            loader: 'sass-loader',
+                            options: {
+                                data: '@import "main";',
+                                includePaths: [
+                                    resolve('src', 'assets')
+                                ]
+                            }
                         }
-                    }
-                ]
+                    ],
+                    fallback: 'vue-style-loader'
+                }),
             },
         ]
     },
@@ -65,8 +95,11 @@ module.exports = {
         }
     },
     plugins: [
-        new CleanWebpackPlugin(['dist']),
         new VueLoaderPlugin(),
+        new ExtractTextPlugin({
+            allChunks: true,
+            filename: '[name].[chunkhash].css'
+        }),
         new CompressionPlugin()
     ]
 };
