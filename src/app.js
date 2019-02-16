@@ -1,5 +1,3 @@
-
-
 import Vue from 'vue'
 import BootstrapVue from 'bootstrap-vue'
 import VueClipboard from 'vue-clipboard2'

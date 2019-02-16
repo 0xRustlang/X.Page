@@ -27,8 +27,8 @@
 </template>
 
 <script>
-    import CopyButton from "@/components/CopyButtonComponent.vue"
-    import FlagIconComponent from "@/components/FlagIconComponent.vue"
+    import CopyButton from '@/components/CopyButtonComponent.vue'
+    import FlagIconComponent from '@/components/FlagIconComponent.vue'
 
     export default {
         name: 'TableComponent',

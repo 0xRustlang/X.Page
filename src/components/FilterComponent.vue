@@ -25,7 +25,7 @@
 
 <script>
     import Multiselect from 'vue-multiselect'
-    import FlagIconComponent from "./FlagIconComponent.vue";
+    import FlagIconComponent from '@/components/FlagIconComponent.vue'
 
     export default {
         name: 'FilterComponent',
@@ -59,9 +59,15 @@
     }
 </script>
 
-<style lang="css">
+<style lang="scss" scoped>
     .option__desc {
         display: inline-block;
         vertical-align: middle;
+    }
+
+    .multiselect__option {
+        .flag-icon {
+            vertical-align: middle;
+        }
     }
 </style>
