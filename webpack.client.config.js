@@ -1,6 +1,8 @@
 const merge = require('webpack-merge');
 const VueSSRClientPlugin = require('vue-server-renderer/client-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
+const ImageminPlugin = require('imagemin-webpack-plugin').default;
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const baseConfig = require('./webpack.config');
 
 module.exports = merge(baseConfig, {
@@ -16,6 +18,14 @@ module.exports = merge(baseConfig, {
     },
     plugins: [
         new CleanWebpackPlugin(["dist"]),
+        new ImageminPlugin({
+            plugins: [
+                imageminMozjpeg({
+                    quality: 50,
+                    progressive: true
+                })
+            ]
+        }),
         new VueSSRClientPlugin()
     ]
 });

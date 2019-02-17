@@ -50,7 +50,7 @@
 <style lang="scss" scoped>
     .header {
         height: 60vh;
-        background: url(assets/background.png) 50%;
+        background: url(assets/background.jpg) 50%;
         background-size: cover;
         position: relative;
         display: flex;
