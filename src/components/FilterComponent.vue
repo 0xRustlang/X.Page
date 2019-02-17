@@ -1,7 +1,7 @@
 <template>
     <multiselect v-model="selectedCountries"
                  placeholder="Country..."
-                 :options="countryOptions"
+                 :options="sortedCountryOptions"
                  track-by="country"
                  label="country"
                  :clear-on-select="false"
@@ -45,6 +45,11 @@
                 this.selectedCountries = []
             }
         },
+        computed: {
+            sortedCountryOptions() {
+                return this.countryOptions.sort((optionA, optionB) => optionA.country.localeCompare(optionB.country));
+            }
+        },
         watch: {
             value: function (val) {
                 this.selectedCountries = val;
@@ -52,9 +57,6 @@
             selectedCountries: function (val) {
                 this.$emit('input', val);
             }
-        },
-        mounted() {
-            this.countryOptions = this.countryOptions.sort();
         }
     }
 </script>
