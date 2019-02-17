@@ -3,7 +3,7 @@
         <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
             <b-row>
                 <b-col>
-                    <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)">
+                    <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)" class="m-0">
                         <b-input-group>
                             <b-form-input :state="valid"
                                           v-model.trim="server"
