@@ -91,8 +91,4 @@
             }
         }
     }
-
-    a.btn {
-        padding: 0.70rem 0.70rem;
-    }
 </style>
