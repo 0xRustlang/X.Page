@@ -32,9 +32,9 @@
                 </b-container>
             </div>
         </header>
-        <section class="content">
+        <div class="content">
             <router-view></router-view>
-        </section>
+        </div>
     </div>
 </template>
 
