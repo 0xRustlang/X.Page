@@ -48,7 +48,17 @@
             TableComponent
         },
         metaInfo: {
-            title: 'Прокси для Телеграм, список прокси'
+            title: 'Прокси для Телеграм, список прокси SOCKS5, HTTP',
+            meta: [
+                {
+                    name: 'description',
+                    content: 'Бесплатный список проверенных прокси SOCKS5, HTTP с ежеминутным обновлением'
+                },
+                {
+                    name: 'keywords',
+                    content: 'прокси, прокси бесплатно, socks5, http, firex proxy, прокси телеграм, быстрые прокси'
+                }
+            ]
         },
         data() {
             return {

@@ -74,7 +74,17 @@
             CopyButton
         },
         metaInfo: {
-            title: 'Проверка прокси серверов, прокси чекер'
+            title: 'Проверка прокси, прокси чекер',
+            meta: [
+                {
+                    name: 'description',
+                    content: 'Беспланая проверка досупности прокси SOCKS5, HTTP'
+                },
+                {
+                    name: 'keywords',
+                    content: 'прокси, прокси чекер, проверка прокси, доступность прокси, прокси чекер онлайн, проверка прокси онлайн, socks5, http, firex proxy'
+                }
+            ]
         },
         data() {
             return {
