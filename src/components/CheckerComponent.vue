@@ -64,13 +64,15 @@
 </template>
 
 <script>
-    import CopyButton from "@/components/CopyButtonComponent.vue"
+    import FlagIconComponent from '@/components/FlagIconComponent.vue'
+    import CopyButton from '@/components/CopyButtonComponent.vue'
 
     export const MAX_QUEUE_SIZE = 20;
 
     export default {
         name: 'CheckerComponent',
         components: {
+            FlagIconComponent,
             CopyButton
         },
         metaInfo: {
@@ -145,13 +147,17 @@
         },
         methods: {
             onPaste(e) {
-                const data = (e.originalEvent || e)
+                const clipboard = (e.originalEvent || e)
                     .clipboardData
                     .getData('text/plain')
-                    .split('\n')
-                    .slice(0, this.availableQueueSize())
+                    .split('\n');
+
+                const data = clipboard
                     .filter(this.checkServer.bind(this))
+                    .slice(0, this.availableQueueSize())
                     .map(v => this.create(...v.split(':')));
+
+                this.server = clipboard.find(s => this.checkServer(s) === false) || '';
 
                 this.proxies.push(...data);
                 this.ws.send(JSON.stringify(data));
@@ -171,9 +177,10 @@
 
                 const proxy = this.create(...newServer.split(':'));
 
-                this.server = '';
                 this.proxies.push(proxy);
                 this.ws.send(JSON.stringify([proxy]));
+
+                this.server = '';
             },
             availableQueueSize() {
                 return MAX_QUEUE_SIZE - this.proxies.filter(v => v.counter < 2).length;
