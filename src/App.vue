@@ -5,19 +5,21 @@
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
-                        <b-nav-item to="/" exact>Home</b-nav-item>
-                        <b-nav-item to="/proxy-checker">Proxy Checker</b-nav-item>
+                        <b-nav-item :to="$i18nRoute({ name: 'home' })" exact>{{ $t('pages.home') }}</b-nav-item>
+                        <b-nav-item :to="$i18nRoute({ name: 'proxy-checker' })">{{ $t('pages.checker') }}</b-nav-item>
                     </b-navbar-nav>
                     <!-- Right aligned nav items -->
                     <b-navbar-nav class="ml-auto">
                         <b-nav-item
                                 href="https://chrome.google.com/webstore/detail/firex-proxy/jccfbhillgcekaepchoahodacnlhcbnj"
                                 target="_blank">
-                            Add to Chrome
+                            {{ $t('addon.chrome') }}
                         </b-nav-item>
                         <b-nav-item href="https://addons.mozilla.org/ru/firefox/addon/firex-proxy" target="_blank">
-                            Add to Firefox
+                            {{ $t('addon.firefox') }}
                         </b-nav-item>
+                        <account-component></account-component>
+                        <language-switcher-component></language-switcher-component>
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
@@ -35,14 +37,35 @@
         <div class="content">
             <router-view></router-view>
         </div>
+        <auth-modal-component></auth-modal-component>
     </div>
 </template>
 
 <script>
+    import AuthModalComponent from "@/components/AuthModalComponent"
+    import LanguageSwitcherComponent from "@/components/LanguageSwitcherComponent";
+    import AccountComponent from "@/components/AccountComponent";
+
     export default {
         name: 'App',
+        components: {
+            AccountComponent,
+            LanguageSwitcherComponent,
+            AuthModalComponent
+        },
         metaInfo: {
             titleTemplate: '%s - FireX Proxy'
+        },
+        async mounted() {
+            if (this.$store.state.user.accessToken) {
+                const isExpired = await this.$store.dispatch('user/isExpired');
+
+                if (isExpired) {
+                    await this.$store.dispatch('user/refreshToken');
+                }
+            }
+
+            await this.$store.dispatch('user/profile');
         }
     }
 </script>

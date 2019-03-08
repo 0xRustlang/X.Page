@@ -31,6 +31,7 @@
                 </b-col>
             </b-row>
         </b-container>
+        <router-view></router-view>
     </b-container>
 </template>
 
@@ -38,7 +39,7 @@
     import FilterComponent from '@/components/FilterComponent.vue'
     import ProtocolFilterComponent from '@/components/ProtocolFilterComponent.vue'
     import TableComponent from '@/components/TableComponent.vue'
-    import axios from 'axios'
+    import { mapState } from 'vuex'
 
     export default {
         name: 'LandingComponent',
@@ -62,30 +63,37 @@
         },
         data() {
             return {
-                predefinedItems: [],
-                items: [],
                 currentPage: 1,
-                perPage: 50,
-                selectedCountries: [],
-                selectedProtocols: [
-                    'SOCKS5',
-                    'HTTP'
-                ]
+                perPage: 50
             }
         },
         computed: {
-            countries: {
-                get: function () {
-                    return this.items
-                        .filter(this.unique)
-                        .map(item => {
-                            const { isoCode, country } = item;
-
-                            return {
-                                isoCode: isoCode,
-                                country: country
-                            }
-                        })
+            ...mapState({
+                predefinedItems: state => state.proxies.items
+            }),
+            ...mapState('filters', {
+                countries: 'countries',
+                protocols: 'protocols'
+            }),
+            items() {
+                return this.predefinedItems
+                    .filter(this.applySelectedCountries)
+                    .filter(this.applySelectedProtocols);
+            },
+            selectedCountries: {
+                get() {
+                    return this.$store.state.filters.countryFilter;
+                },
+                set(newValue) {
+                    this.$store.commit('filters/setCountryFilter', newValue);
+                }
+            },
+            selectedProtocols: {
+                get() {
+                    return this.$store.state.filters.protocolFilter;
+                },
+                set(newValue) {
+                    this.$store.commit('filters/setProtocolFilter', newValue);
                 }
             }
         },
@@ -98,54 +106,13 @@
             },
             applySelectedProtocols: function (item) {
                 return this.selectedProtocols.indexOf(item.protocol) > -1
-            },
-            applyFilter: function () {
-                this.items = this.predefinedItems
-                    .filter(this.applySelectedCountries)
-                    .filter(this.applySelectedProtocols)
             }
         },
-        watch: {
-            selectedCountries: function () {
-                this.applyFilter()
-            },
-            selectedProtocols: function () {
-                this.applyFilter()
-            }
-        },
-        mounted() {
-            axios
-                .get('https://api.firexproxy.com/v1/proxy')
-                .then(response => response.data)
-                .then(response => {
-                    this.predefinedItems = response
-                        .filter(item => {
-                            const { iso_code: isoCode } = item;
-
-                            return isoCode
-                        })
-                        .map(item => {
-                            const {
-                                server,
-                                port,
-                                iso_code: isoCode,
-                                country,
-                                protocol,
-                                ping_time_ms: pingTimeMs
-                            } = item;
-
-                            return {
-                                isoCode: isoCode.toLowerCase(),
-                                server: server,
-                                port: port,
-                                country: country,
-                                protocol: protocol,
-                                pingTimeMs: pingTimeMs
-                            };
-                        });
-
-                    this.items = this.predefinedItems;
-                });
+        async mounted() {
+            try {
+                await this.$store.dispatch('poll');
+                await this.$store.dispatch('filters/updateCountries', this.predefinedItems.filter(this.unique));
+            } catch (_) {}
         }
     }
 </script>

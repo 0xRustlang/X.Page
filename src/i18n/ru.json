@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "home": "Главная",
+    "checker": "Прокси чекер"
+  },
+  "addon": {
+    "chrome": "Установить в Chrome",
+    "firefox": "Установить в Firefox"
+  },
+  "signin": "Войти",
+  "signin-with": "Войти с помощью",
+  "logout": "Выйти"
+}

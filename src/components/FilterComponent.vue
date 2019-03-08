@@ -36,8 +36,7 @@
         props: ['value', 'items'],
         data() {
             return {
-                selectedCountries: this.value,
-                countryOptions: this.items
+                selectedCountries: this.value
             }
         },
         methods: {
@@ -47,7 +46,7 @@
         },
         computed: {
             sortedCountryOptions() {
-                return this.countryOptions.sort((optionA, optionB) => optionA.country.localeCompare(optionB.country));
+                return this.items.sort((optionA, optionB) => optionA.country.localeCompare(optionB.country));
             }
         },
         watch: {

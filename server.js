@@ -10,6 +10,7 @@ const templatePath = resolve('src', 'index.template.html');
 const template = fs.readFileSync(templatePath, 'utf-8');
 const bundle = require('./dist/vue-ssr-server-bundle.json');
 const clientManifest = require('./dist/vue-ssr-client-manifest.json');
+const { directive } = require('vue-i18n-extensions');
 
 const renderer = createRenderer(bundle, {
     template,
@@ -49,6 +50,9 @@ app.listen(8084, () => {
 function createRenderer(bundle, options) {
     return createBundleRenderer(bundle, Object.assign(options, {
         basedir: resolve('dist'),
-        runInNewContext: false
+        runInNewContext: false,
+        directives: {
+            t: directive
+        }
     }))
 }

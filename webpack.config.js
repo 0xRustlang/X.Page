@@ -8,7 +8,8 @@ const path = require('path');
 const resolve = (...paths) => path.join(__dirname, ...paths);
 
 module.exports = {
-    mode: 'production',
+    mode: 'development',
+    devtool: 'cheap-module-source-map',
     output: {
         path: resolve('dist'),
         publicPath: "/dist/"

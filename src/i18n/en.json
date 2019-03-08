@@ -1,0 +1,13 @@
+{
+  "pages": {
+    "home": "Home",
+    "checker": "Proxy Checker"
+  },
+  "addon": {
+    "chrome": "Add to Chrome",
+    "firefox": "Add to Firefox"
+  },
+  "signin": "Sign in",
+  "signin-with": "Sign in with",
+  "logout": "Log out"
+}
