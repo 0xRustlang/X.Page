@@ -1,7 +1,7 @@
 <template>
     <multiselect v-model="selectedCountries"
-                 placeholder="Country..."
-                 :options="sortedCountryOptions"
+                 :placeholder="$t('filters.country.placeholder')"
+                 :options="countries"
                  track-by="country"
                  label="country"
                  :clear-on-select="false"
@@ -15,8 +15,10 @@
             </div>
         </template>
         <template slot="option" slot-scope="props">
-            <flag-icon-component :iso="props.option.isoCode"></flag-icon-component>
             <div class="option__desc">
+                <no-ssr>
+                    <flag :iso="props.option.isoCode" :squared="false"></flag>
+                </no-ssr>
                 <span class="option__title">{{ props.option.country }}</span>
             </div>
         </template>
@@ -24,39 +26,18 @@
 </template>
 
 <script>
-    import Multiselect from 'vue-multiselect'
-    import FlagIconComponent from '@/components/FlagIconComponent.vue'
-
     export default {
         name: 'FilterComponent',
-        components: {
-            FlagIconComponent,
-            Multiselect
-        },
-        props: ['value', 'items'],
-        data() {
-            return {
-                selectedCountries: this.value,
-                countryOptions: this.items
-            }
-        },
         methods: {
             clearAll() {
                 this.selectedCountries = []
             }
         },
         computed: {
-            sortedCountryOptions() {
-                return this.countryOptions.sort((optionA, optionB) => optionA.country.localeCompare(optionB.country));
-            }
-        },
-        watch: {
-            value: function (val) {
-                this.selectedCountries = val;
-            },
-            selectedCountries: function (val) {
-                this.$emit('input', val);
-            }
+            ...mapState({
+                countries: state => state.filter.countries,
+                selectedCountries: state => state.filter.countryFilter
+            }),
         }
     }
 </script>
@@ -65,11 +46,5 @@
     .option__desc {
         display: inline-block;
         vertical-align: middle;
-    }
-
-    .multiselect__option {
-        .flag-icon {
-            vertical-align: middle;
-        }
     }
 </style>

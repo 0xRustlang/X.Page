@@ -1,30 +1,21 @@
 <template>
     <b-button variant="light" @click="copy" :class="{ switched: state }">
-        <font-awesome-icon icon="copy" class="icon-default"></font-awesome-icon>
-        <font-awesome-icon icon="check" class="icon-clicked"></font-awesome-icon>
+        <fa :icon="['fa', 'copy']" class="icon-default"></fa>
+        <fa :icon="['fa', 'check']" class="icon-clicked"></fa>
     </b-button>
 </template>
 
 <script>
     export default {
-        name: 'CopyButton',
-        props: ['copyString'],
-        data() {
-            return {
-                state: false,
-                timer: null
-            }
-        },
+        name: 'CopyButtonComponent',
+        props: ['copyString', 'state', 'timer'],
         methods: {
             copy() {
                 this.$copyText(this.copyString);
                 this.state = true;
 
                 clearTimeout(this.timer);
-
-                this.timer = setTimeout(() => {
-                    this.state = false;
-                }, 2000);
+                this.timer = setTimeout(() => { this.state = false }, 2000);
             }
         }
     }

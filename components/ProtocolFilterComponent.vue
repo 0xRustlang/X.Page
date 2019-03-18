@@ -10,13 +10,8 @@
 </template>
 
 <script>
-    import Multiselect from 'vue-multiselect'
-
     export default {
         name: 'ProtocolFilterComponent',
-        components: {
-            Multiselect
-        },
         props: ['value', 'items'],
         data() {
             return {

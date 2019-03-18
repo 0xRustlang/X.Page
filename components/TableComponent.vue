@@ -9,17 +9,19 @@
                  :per-page="perPage"
                  responsive>
             <template slot="country" slot-scope="data">
-                <flag-icon-component :iso="data.item.isoCode"></flag-icon-component>
+                <no-ssr>
+                    <flag :iso="data.item.isoCode" :squared="false"></flag>
+                </no-ssr>
                 {{ data.item.country }}
             </template>
             <template slot="export" slot-scope="data">
-                <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
+                <copy-button-component :copy-string="`${data.item.server}:${data.item.port}`"></copy-button-component>
                 <a :href="`tg://socks?server=${data.item.server}&port=${data.item.port}`"
                    target="_blank"
                    class="btn btn-primary"
                    variant="primary"
                    v-if="data.item.protocol.startsWith('SOCKS')">
-                    <font-awesome-icon icon="paper-plane"></font-awesome-icon>
+                    <fa :icon="['fa', 'paper-plane']" class="icon-default"></fa>
                 </a>
             </template>
         </b-table>
@@ -27,15 +29,12 @@
 </template>
 
 <script>
-    import CopyButton from '@/components/CopyButtonComponent.vue'
-    import FlagIconComponent from '@/components/FlagIconComponent.vue'
+    import CopyButtonComponent from '@/components/CopyButtonComponent.vue'
 
     export default {
-        name: 'TableComponent',
         props: ['items', 'currentPage', 'perPage'],
         components: {
-            FlagIconComponent,
-            CopyButton
+            CopyButtonComponent
         },
         data() {
             return {
@@ -45,34 +44,34 @@
                     {
                         key: 'country',
                         sortable: true,
-                        label: 'Country',
+                        label: this.$i18n.t('table.country'),
                         class: 'align-middle'
                     },
                     {
                         key: 'server',
-                        label: 'IP address',
+                        label: this.$i18n.t('table.server'),
                         class: 'align-middle'
                     },
                     {
                         key: 'port',
-                        label: 'Port',
+                        label: this.$i18n.t('table.port'),
                         class: 'align-middle'
                     },
                     {
                         key: 'protocol',
                         sortable: true,
-                        label: 'Protocol',
+                        label: this.$i18n.t('table.protocol'),
                         class: 'align-middle'
                     },
                     {
                         key: 'pingTimeMs',
                         sortable: true,
-                        label: 'Ping (ms)',
+                        label: this.$i18n.t('table.ping'),
                         class: 'align-middle'
                     },
                     {
                         key: 'export',
-                        label: 'Export',
+                        label: this.$i18n.t('table.export'),
                         class: 'align-middle'
                     }
                 ]

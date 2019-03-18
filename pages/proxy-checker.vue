@@ -5,21 +5,19 @@
                 <b-col>
                     <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)" class="m-0">
                         <b-input-group>
-                            <b-form-input :state="valid"
-                                          v-model.trim="server"
-                                          type="text"
-                                          placeholder="127.0.0.1:8080">
-                            </b-form-input>
+                            <b-form-input :state="valid" v-model.trim="server" type="text" placeholder="127.0.0.1:8080"></b-form-input>
                             <b-input-group-append>
                                 <b-btn variant="primary" class="ml-1" type="submit">
-                                    <font-awesome-icon icon="plus-square"></font-awesome-icon>
+                                    <fa :icon="['fa', 'plus-square']" class="icon-default"></fa>
                                 </b-btn>
                             </b-input-group-append>
                         </b-input-group>
                     </b-form>
                 </b-col>
                 <b-col>
-                    <b-button variant="primary" @click="copyAlive()" class="float-right">Copy alive</b-button>
+                    <b-button variant="primary" @click="copyAlive()" class="float-right">
+                        {{ $t('proxy.copyAlive') }}
+                    </b-button>
                 </b-col>
             </b-row>
         </b-container>
@@ -33,28 +31,30 @@
                         {{ data.index + 1 }}
                     </template>
                     <template slot="country" slot-scope="data">
-                        <flag-icon-component :iso="data.item.isoCode"></flag-icon-component>
+                        <no-ssr>
+                            <flag :iso="data.item.isoCode" :squared="false"></flag>
+                        </no-ssr>
                         {{ data.item.country }}
                     </template>
                     <template slot="export" slot-scope="data">
-                        <copy-button :copy-string="`${data.item.server}:${data.item.port}`"></copy-button>
+                        <copy-button-component :copy-string="`${data.item.server}:${data.item.port}`"></copy-button-component>
                         <a :href="'tg://socks?server=${data.item.server}&port=${data.item.port}'"
                            target="_blank"
                            class="btn btn-primary"
                            variant="primary"
                            v-if="data.item.protocol.startsWith('SOCKS')">
-                            <font-awesome-icon icon="paper-plane"></font-awesome-icon>
+                            <fa :icon="['fa', 'paper-plane']" class="icon-default"></fa>
                         </a>
                     </template>
                     <template slot="status" slot-scope="data">
                         <b-badge variant="success" v-if="data.item.lossRatio < 1">
-                            Available
+                            {{ $t('proxy.status.available') }}
                         </b-badge>
                         <b-badge variant="danger" v-else-if="data.item.lossRatio === 1 && data.item.counter === 2">
-                            Unavailable
+                            {{ $t('proxy.status.unavailable') }}
                         </b-badge>
                         <b-badge variant="warning" v-else>
-                            Checking
+                            {{ $t('proxy.status.checking') }}
                         </b-badge>
                     </template>
                 </b-table>
@@ -64,29 +64,28 @@
 </template>
 
 <script>
-    import FlagIconComponent from '@/components/FlagIconComponent.vue'
-    import CopyButton from '@/components/CopyButtonComponent.vue'
+    import CopyButtonComponent from '@/components/CopyButtonComponent.vue'
 
     export const MAX_QUEUE_SIZE = 20;
 
     export default {
-        name: 'CheckerComponent',
         components: {
-            FlagIconComponent,
-            CopyButton
+            CopyButtonComponent
         },
-        metaInfo: {
-            title: 'Проверка прокси, прокси чекер',
-            meta: [
-                {
-                    name: 'description',
-                    content: 'Беспланая проверка досупности прокси SOCKS5, HTTP'
-                },
-                {
-                    name: 'keywords',
-                    content: 'прокси, прокси чекер, проверка прокси, доступность прокси, прокси чекер онлайн, проверка прокси онлайн, socks5, http, firex proxy'
-                }
-            ]
+        head() {
+            return {
+                title: 'Проверка прокси, прокси чекер',
+                meta: [
+                    {
+                        name: 'description',
+                        content: 'Беспланая проверка досупности прокси SOCKS5, HTTP'
+                    },
+                    {
+                        name: 'keywords',
+                        content: 'прокси, прокси чекер, проверка прокси, доступность прокси, прокси чекер онлайн, проверка прокси онлайн, socks5, http, firex proxy'
+                    }
+                ]
+            }
         },
         data() {
             return {
@@ -101,40 +100,40 @@
                     {
                         key: 'status',
                         sortable: true,
-                        label: 'Status',
+                        label: this.$i18n.t('table.status'),
                         class: 'align-middle'
                     },
                     {
                         key: 'country',
                         sortable: true,
-                        label: 'Country',
+                        label: this.$i18n.t('table.country'),
                         class: 'align-middle'
                     },
                     {
                         key: 'server',
-                        label: 'IP address',
+                        label: this.$i18n.t('table.server'),
                         class: 'align-middle'
                     },
                     {
                         key: 'port',
-                        label: 'Port',
+                        label: this.$i18n.t('table.port'),
                         class: 'align-middle'
                     },
                     {
                         key: 'protocol',
                         sortable: true,
-                        label: 'Protocol',
+                        label: this.$i18n.t('table.protocol'),
                         class: 'align-middle'
                     },
                     {
                         key: 'pingTimeMs',
                         sortable: true,
-                        label: 'Ping (ms)',
+                        label: this.$i18n.t('table.ping'),
                         class: 'align-middle'
                     },
                     {
                         key: 'export',
-                        label: 'Actions',
+                        label: this.$i18n.t('table.export'),
                         class: 'align-middle'
                     }
                 ]
