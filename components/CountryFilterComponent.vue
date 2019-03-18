@@ -26,6 +26,8 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'FilterComponent',
         methods: {
@@ -36,8 +38,16 @@
         computed: {
             ...mapState({
                 countries: state => state.filter.countries,
-                selectedCountries: state => state.filter.countryFilter
             }),
+            selectedCountries: {
+                get() {
+                    return this.$store.state.filter.countryFilter;
+                },
+
+                set(newValue) {
+                    this.$store.commit('filter/setCountryFilter', newValue);
+                }
+            }
         }
     }
 </script>
