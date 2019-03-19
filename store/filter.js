@@ -13,11 +13,13 @@ export const state = () => ({
 
 export const mutations = {
     updateCountries(state, countries) {
-        state.countries = countries.map(item => {
-            const { isoCode, country } = item;
+        state.countries = countries
+            .map(item => {
+                const { isoCode, country } = item;
 
-            return { isoCode, country };
-        }).sort((optionA, optionB) => optionA.country.localeCompare(optionB.country));
+                return { isoCode, country };
+            })
+            .sort((optionA, optionB) => optionA.country.localeCompare(optionB.country));
     },
     setCountryFilter(state, countryFilter) {
         state.countryFilter = countryFilter;

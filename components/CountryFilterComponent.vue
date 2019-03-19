@@ -2,7 +2,7 @@
     <multiselect v-model="selectedCountries"
                  :placeholder="$t('filters.country.placeholder')"
                  :options="countries"
-                 track-by="country"
+                 track-by="isoCode"
                  label="country"
                  :clear-on-select="false"
                  :searchable="true"
@@ -10,7 +10,7 @@
                  :close-on-select="false">
         <template slot="clear" slot-scope="props">
             <div class="multiselect__clear"
-                 v-if="selectedCountries.length"
+                 v-show="selectedCountries.length"
                  @mousedown.prevent.stop="clearAll()">
             </div>
         </template>
