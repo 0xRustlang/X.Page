@@ -15,6 +15,8 @@ RUN npm run build
 FROM node:lts-alpine
 
 # Set environment variables
+ENV NUXT_HOST 0.0.0.0
+ENV NUXT_PORT 8084
 ENV NODE_ENV production
 ENV NODE_WORKDIR /usr/src/app
 
