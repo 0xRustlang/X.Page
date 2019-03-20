@@ -43,7 +43,6 @@
                 get() {
                     return this.$store.state.filter.countryFilter;
                 },
-
                 set(newValue) {
                     this.$store.commit('filter/setCountryFilter', newValue);
                 }
