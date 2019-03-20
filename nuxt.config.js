@@ -23,7 +23,7 @@ module.exports = {
         { src: '~plugins/vue-flag-icon.js', ssr: false }
     ],
     axios: {
-        baseURL: 'http://localhost:2020',
+        baseURL: 'https://api.firexproxy.com',
         credentials: true
     },
     modules: [
