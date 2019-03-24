@@ -1,7 +1,7 @@
 <template>
     <div id="app">
         <header>
-            <b-navbar toggleable="md" type="dark" variant="primary">
+            <b-navbar toggleable="md" type="light">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 <b-collapse is-nav id="nav_collapse">
                     <b-navbar-nav>
@@ -80,3 +80,9 @@
         }
     }
 </script>
+
+<style scoped>
+    nav {
+        font-weight: 500;
+    }
+</style>
