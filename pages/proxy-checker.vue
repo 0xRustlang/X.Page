@@ -74,15 +74,15 @@
         },
         head() {
             return {
-                title: 'Проверка прокси, прокси чекер',
+                title: this.$i18n.t('metadata.title.checker'),
                 meta: [
                     {
                         name: 'description',
-                        content: 'Беспланая проверка досупности прокси SOCKS5, HTTP'
+                        content: this.$i18n.t('metadata.description.checker')
                     },
                     {
                         name: 'keywords',
-                        content: 'прокси, прокси чекер, проверка прокси, доступность прокси, прокси чекер онлайн, проверка прокси онлайн, socks5, http, firex proxy'
+                        content: this.$i18n.t('metadata.keywords.checker')
                     }
                 ]
             }

@@ -42,15 +42,15 @@
         },
         head() {
             return {
-                title: 'Прокси для Телеграм, список прокси SOCKS5, HTTP',
+                title: this.$i18n.t('metadata.title.main'),
                 meta: [
                     {
                         name: 'description',
-                        content: 'Бесплатный список проверенных прокси SOCKS5, HTTP с ежеминутным обновлением'
+                        content: this.$i18n.t('metadata.description.main')
                     },
                     {
                         name: 'keywords',
-                        content: 'прокси, прокси бесплатно, socks5, http, firex proxy, прокси телеграм, быстрые прокси'
+                        content: this.$i18n.t('metadata.keywords.main')
                     }
                 ]
             }

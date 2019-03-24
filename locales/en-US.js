@@ -1,4 +1,18 @@
 export default {
+    metadata: {
+        title: {
+            main: 'Free anonymous SOCKS5, HTTP proxy, telegram proxy',
+            checker: 'Online free proxy checker'
+        },
+        description: {
+            main: 'Free checked proxy list with SOCKS5 and HTTP proxy. The proxy list is updated every one minute.',
+            checker: 'Online free proxy checker'
+        },
+        keywords: {
+            main: 'proxy, free proxy, socks5, http, firex proxy, telegram proxy, fast proxy, anonymous proxy',
+            checker: 'proxy, proxy checker, is proxy alive, online proxy checker, socks5, http, firex proxy'
+        }
+    },
     menu: {
         addon: {
             chrome: 'Add to Chrome',
