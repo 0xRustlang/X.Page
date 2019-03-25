@@ -36,13 +36,18 @@
                     if (!win.closed) {
                         setTimeout(watcher, 100);
                     } else {
-                        this.$store.commit('user/setCredentials', { credentials: this.$cookies.get('credentials') });
+                        const credentials = this.$cookies.get('credentials');
+
+                        if (!credentials) {
+                            return;
+                        }
+
+                        this.$store.commit('user/setCredentials', { credentials });
                         this.$refs.authModal.hide();
                     }
                 };
 
                 this.$store.dispatch('user/requestAuth', provider).then(response => win.location.href = response);
-
                 setTimeout(watcher, 100);
             }
         }
