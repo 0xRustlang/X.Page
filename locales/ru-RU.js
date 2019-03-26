@@ -80,8 +80,8 @@ export default {
             premium: 'Премиум'
         },
         prices: {
-            free: '<small>₽</small>0',
-            premium: '<small>₽</small>120'
+            free: '0 <small>₽</small>',
+            premium: '120 <small>₽</small>'
         }
     },
     footer: {
