@@ -2,7 +2,7 @@
     <b-container fluid class="pt-3">
         <b-container fluid class="p-3 mb-3 bg-white rounded">
             <b-row class="justify-content-center">
-                <b-col cols="12" sm="10" md="6" xl="3" class="text-center my-sm-1">
+                <b-col cols="12" sm="10" md="6" xl="3" class="text-center my-1">
                     <div class="table py-3">
                         <h6 class="category">
                             {{ $t('pricing.headers.free') }}
@@ -30,7 +30,7 @@
                         </a>
                     </div>
                 </b-col>
-                <b-col cols="12" sm="10" md="6" xl="3" class="text-light text-center my-sm-1">
+                <b-col cols="12" sm="10" md="6" xl="3" class="text-light text-center my-1">
                     <div class="table table-primary py-3">
                         <h6 class="category">
                             {{ $t('pricing.headers.premium') }}
