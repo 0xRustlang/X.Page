@@ -10,19 +10,19 @@
                         <h1 class="block-caption" v-html="$t('pricing.prices.free')"></h1>
                         <ul class="text-left">
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.aliveProxy')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.aliveProxy')"></span>
                             </li>
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.bandwidth')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.bandwidth')"></span>
                             </li>
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.browsers')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.browsers')"></span>
                             </li>
                             <li class="text-muted">
-                                <fa class="mr-2" :icon="['fa', 'times']"></fa> <span v-html="$t('pricing.order.fast')"></span>
+                                <fa :icon="['fa', 'times']"></fa> <span v-html="$t('pricing.order.fast')"></span>
                             </li>
                             <li class="text-muted">
-                                <fa class="mr-2" :icon="['fa', 'times']"></fa> <span v-html="$t('pricing.order.support')"></span>
+                                <fa :icon="['fa', 'times']"></fa> <span v-html="$t('pricing.order.support')"></span>
                             </li>
                         </ul>
                         <a href="#" class="btn btn-primary btn-round">
@@ -38,19 +38,19 @@
                         <h1 class="block-caption" v-html="$t('pricing.prices.premium')"></h1>
                         <ul class="text-left">
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.aliveProxy')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.aliveProxy')"></span>
                             </li>
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.bandwidth')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.bandwidth')"></span>
                             </li>
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.browsers')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.browsers')"></span>
                             </li>
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.fastFormatted')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.fastFormatted')"></span>
                             </li>
                             <li>
-                                <fa class="mr-2" :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.supportFormatted')"></span>
+                                <fa :icon="['fa', 'check']"></fa> <span v-html="$t('pricing.order.supportFormatted')"></span>
                             </li>
                         </ul>
                         <a href="#" class="btn btn-white btn-round">
@@ -122,6 +122,9 @@
                 line-height: 2em;
                 padding: 12px 0;
                 border-bottom: 1px solid rgba(153, 153, 153, 0.3);
+                svg {
+                    width: 2em;
+                }
             }
         }
         .btn {
