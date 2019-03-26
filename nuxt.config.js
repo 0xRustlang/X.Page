@@ -38,11 +38,11 @@ module.exports = {
                 imports: [
                     {
                         set: '@fortawesome/free-solid-svg-icons',
-                        icons: ['faCopy', 'faCheck', 'faPaperPlane', 'faPlusSquare']
+                        icons: ['faCopy', 'faCheck', 'faPaperPlane', 'faPlusSquare', 'faEnvelope', 'faTimes']
                     },
                     {
                         set: '@fortawesome/free-brands-svg-icons',
-                        icons: ['faFacebookF', 'faVk', 'faGoogle', 'faYandex']
+                        icons: ['faFacebookF', 'faVk', 'faGoogle', 'faYandex', 'faTwitter']
                     }
                 ]
             }

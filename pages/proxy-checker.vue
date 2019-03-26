@@ -1,5 +1,5 @@
 <template>
-    <b-container fluid class="pt-3">
+    <b-container fluid class="content pt-3">
         <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
             <b-row>
                 <b-col>

@@ -57,11 +57,11 @@
 <style lang="scss">
     .social-btns {
         .btn {
-            width: 70px;
-            height: 70px;
+            width: 60px;
+            height: 60px;
             padding: 10px 16px;
             border-radius: 35px;
-            font-size: 24px;
+            font-size: 26px;
             line-height: 1.28;
             border: none;
             margin: 0 10px;
