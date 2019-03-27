@@ -42,7 +42,7 @@ module.exports = {
                     },
                     {
                         set: '@fortawesome/free-brands-svg-icons',
-                        icons: ['faFacebookF', 'faVk', 'faGoogle', 'faYandex', 'faTwitter']
+                        icons: ['faFacebookF', 'faVk', 'faGoogle', 'faYandex', 'faTwitter', 'faGithub']
                     }
                 ]
             }

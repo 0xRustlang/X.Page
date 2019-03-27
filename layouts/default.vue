@@ -81,11 +81,11 @@
                 <b-row class="pb-3">
                     <b-col md="12">
                         <div class="my-3 text-center">
-                            <b-link href="#" class="text-light">
-                                <fa :icon="['fab', 'twitter']" class="icon-default fa-lg mx-2"></fa>
+                            <b-link href="https://github.com/Orogenesis/FireX-Proxy" target="_blank" class="text-light">
+                                <fa :icon="['fab', 'github']" class="fa-lg mx-2"></fa>
                             </b-link>
-                            <b-link href="#" class="text-light">
-                                <fa :icon="['fab', 'vk']" class="icon-default fa-lg mx-2"></fa>
+                            <b-link href="#" target="_blank" class="text-light">
+                                <fa :icon="['fab', 'twitter']" class="fa-lg mx-2"></fa>
                             </b-link>
                         </div>
                     </b-col>
