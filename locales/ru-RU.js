@@ -85,6 +85,6 @@ export default {
         }
     },
     footer: {
-        about: 'FireX Proxy — популярное расширение для Mozilla Firefox, Google Chrome, Vivaldi, Opera и других браузеров на основе Chromium. Мы предоставляем тысячи проверенных, анонимных бесплатных и надёжных прокси-серверов.'
+        about: 'FireX Proxy — популярное расширение для Mozilla Firefox, Google Chrome, Vivaldi, Opera и других браузеров на основе Chromium. Мы предоставляем тысячи проверенных, анонимных, бесплатных и надёжных прокси-серверов.'
     }
 }
