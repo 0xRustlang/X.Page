@@ -1,6 +1,6 @@
 <template>
     <multiselect v-model="selectedProtocols"
-                 :options="protocolOptions"
+                 :options="protocols"
                  :clear-on-select="false"
                  :searchable="false"
                  :multiple="true"
@@ -10,21 +10,21 @@
 </template>
 
 <script>
+    import { mapState } from 'vuex'
+
     export default {
         name: 'ProtocolFilterComponent',
-        props: ['value', 'items'],
-        data() {
-            return {
-                selectedProtocols: this.value,
-                protocolOptions: this.items
-            }
-        },
-        watch: {
-            value: function (val) {
-                this.selectedProtocols = val;
-            },
-            selectedProtocols: function (val) {
-                this.$emit('input', val);
+        computed: {
+            ...mapState({
+                protocols: state => state.filter.protocols,
+            }),
+            selectedProtocols: {
+                get() {
+                    return this.$store.state.filter.protocolFilter;
+                },
+                set(newValue) {
+                    this.$store.commit('filter/setProtocolFilter', newValue);
+                }
             }
         }
     }

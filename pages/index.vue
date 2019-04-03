@@ -1,12 +1,12 @@
 <template>
-    <b-container fluid class="content pt-3" v-if="items.length">
+    <b-container fluid class="content pt-3">
         <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
             <b-row>
                 <b-col md="6">
                     <country-filter-component></country-filter-component>
                 </b-col>
                 <b-col md="6">
-                    <protocol-filter-component :items="selectedProtocols" v-model="selectedProtocols"></protocol-filter-component>
+                    <protocol-filter-component></protocol-filter-component>
                 </b-col>
             </b-row>
         </b-container>
