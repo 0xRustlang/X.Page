@@ -49,11 +49,6 @@ export default {
         },
         copyAlive: 'Copy alive'
     },
-    headers: {
-        description: {
-            main: 'Free proxy list, proxy for Telegram, proxy checker'
-        }
-    },
     auth: {
         title: 'Log in / Sign up',
         with: 'Log in with',
