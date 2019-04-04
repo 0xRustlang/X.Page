@@ -13,57 +13,64 @@ body {
   }
 }
 
-.multiselect--active {
-  z-index: 10;
-}
-
-.multiselect__clear {
-  position: absolute;
-  right: 35px;
-  height: 22px;
-  width: 22px;
-  display: block;
-  cursor: pointer;
-  z-index: 2;
-  &:before {
-    transform: rotate(45deg);
-  }
-  &:after {
-    transform: rotate(-45deg);
-  }
-  &:after,
-  &:before {
-    content: '';
-    display: block;
+.multiselect {
+  .multiselect__clear {
     position: absolute;
-    width: 2px;
-    height: 16px;
-    background: #aaa;
-    top: 65%;
-    right: 10px;
+    right: 35px;
+    height: 22px;
+    width: 22px;
+    display: block;
+    cursor: pointer;
+    z-index: 2;
+    &:before {
+      transform: rotate(45deg);
+    }
+    &:after {
+      transform: rotate(-45deg);
+    }
+    &:after,
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      width: 2px;
+      height: 16px;
+      background: #aaa;
+      top: 65%;
+      right: 10px;
+    }
   }
-}
-
-.multiselect__option.multiselect__option--highlight:not(.multiselect__option--selected) {
-  background: $primary;
-  &:after {
+  .multiselect__tags {
+    font-size: 12px;
+    padding: 10px 40px 0 8px;
+    .multiselect__tag {
+      background: #e6e7e7;
+      border-radius: 4px;
+      color: #5c6474;
+      font-weight: 500;
+      .multiselect__tag-icon {
+        line-height: 18px;
+        &:hover {
+          background: none;
+          &:after {
+            color: rgba(0, 0, 0, 0.4);
+          }
+        }
+        &:after {
+          color: rgba(0, 0, 0, 0.4);
+        }
+      }
+    }
+  }
+  &.multiselect--active {
+    z-index: 10;
+  }
+  .multiselect__option.multiselect__option--highlight:not(.multiselect__option--selected) {
     background: $primary;
+    &:after {
+      background: $primary;
+    }
   }
-}
-
-.multiselect__tag-icon {
-  background: $primary;
-  &:hover {
-    background: rgba(0, 0, 0, 0.2);
-  }
-  &:after {
-    color: rgba(0, 0, 0, 0.4);
-  }
-}
-
-.multiselect__tag {
-  background: $primary;
-  border-radius: 0;
 }
 
 .header {
