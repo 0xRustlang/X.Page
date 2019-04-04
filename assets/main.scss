@@ -1,7 +1,7 @@
 $primary: #554fe8;
 
 body {
-  background: whitesmoke;
+  background: #fafcfe;
 }
 
 .ps__scrollbar-y-rail {
@@ -109,8 +109,8 @@ body {
 }
 
 .content {
+  flex: 1 1 auto;
   position: relative;
-  margin-top: -60px;
   z-index: 2;
 }
 

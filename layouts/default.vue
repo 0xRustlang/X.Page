@@ -1,6 +1,6 @@
 <template>
-    <div id="app">
-        <header>
+    <div id="app" class="d-flex flex-column">
+        <header class="bg-white">
             <b-navbar toggleable="md" type="light">
                 <b-navbar-toggle target="nav_collapse"></b-navbar-toggle>
                 <b-collapse is-nav id="nav_collapse">
@@ -29,16 +29,6 @@
                     </b-navbar-nav>
                 </b-collapse>
             </b-navbar>
-            <div class="header" v-show="['index', 'proxy-checker'].includes(getRouteBaseName())">
-                <b-container>
-                    <b-row>
-                        <div class="col-md-8 ml-auto mr-auto">
-                            <h1>FireX Proxy</h1>
-                            <h3>{{ $t('headers.description.main') }}</h3>
-                        </div>
-                    </b-row>
-                </b-container>
-            </div>
         </header>
         <nuxt/>
         <footer class="text-light mt-3">
@@ -144,20 +134,23 @@
 </script>
 
 <style lang="scss" scoped>
-    nav {
-        font-weight: 500;
-    }
-
-    footer {
-        background-color: #1c2331;
-        .about {
-            line-height: 1.7rem;
+    #app {
+        min-height: 100vh;
+        nav {
+            font-weight: 500;
+            border-bottom: 2px solid #ebedf2;
         }
-        .footer-copyright {
-            background-color: rgba(0, 0, 0, .2);
-        }
-        hr {
-            border-top: 1px solid rgba(255, 255, 255, .1);
+        footer {
+            background-color: #1c2331;
+            .about {
+                line-height: 1.7rem;
+            }
+            .footer-copyright {
+                background-color: rgba(0, 0, 0, .2);
+            }
+            hr {
+                border-top: 1px solid rgba(255, 255, 255, .1);
+            }
         }
     }
 </style>
