@@ -54,10 +54,6 @@ export default {
         with: 'Вход через',
         logout: 'Выход'
     },
-    currency: {
-        dollar: '$',
-        ruble: '₽'
-    },
     pricing: {
         order: {
             aliveProxy: '<strong>Сотни</strong> живых прокси',
@@ -68,7 +64,23 @@ export default {
             fastFormatted: '<strong>Самые</strong> быстрые прокси',
             supportFormatted: '<strong>24/7</strong> поддержка',
             buy: 'Купить',
-            download: 'Скачать'
+            download: 'Скачать',
+            pay: 'Оплатить',
+            gateway: 'Способ оплаты',
+            details: {
+                title: 'Детали покупки',
+                price: '120₽',
+                discount: '0₽',
+                premium: {
+                    name: 'FireX Premium',
+                    description: 'Премиум доступ для FireX Proxy'
+                },
+                promo: {
+                    section: 'Промо-код',
+                    redeem: 'Применить'
+                },
+                total: 'Всего',
+            }
         },
         headers: {
             free: 'Бесплатный',

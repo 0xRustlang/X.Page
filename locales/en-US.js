@@ -64,7 +64,23 @@ export default {
             fastFormatted: '<strong>Crazy fast</strong> proxy',
             supportFormatted: '<strong>24/7</strong> support',
             buy: 'Order now',
-            download: 'Download'
+            download: 'Download',
+            pay: 'Checkout now',
+            gateway: 'Payment gateway',
+            details: {
+                title: 'Checkout details',
+                price: '$2',
+                discount: '$0',
+                premium: {
+                    name: 'FireX Premium',
+                    description: 'Premium access for FireX Proxy'
+                },
+                promo: {
+                    section: 'Promo code',
+                    redeem: 'Redeem'
+                },
+                total: 'Total',
+            }
         },
         headers: {
             free: 'Free',

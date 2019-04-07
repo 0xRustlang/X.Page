@@ -38,11 +38,31 @@ module.exports = {
                 imports: [
                     {
                         set: '@fortawesome/free-solid-svg-icons',
-                        icons: ['faCopy', 'faCheck', 'faPaperPlane', 'faPlusSquare', 'faEnvelope', 'faTimes']
+                        icons: [
+                            'faCopy',
+                            'faCheck',
+                            'faPaperPlane',
+                            'faPlusSquare',
+                            'faEnvelope',
+                            'faTimes',
+                            'faRubleSign',
+                            'faDollarSign',
+                            'faShoppingCart'
+                        ]
                     },
                     {
                         set: '@fortawesome/free-brands-svg-icons',
-                        icons: ['faFacebookF', 'faVk', 'faGoogle', 'faYandex', 'faTwitter', 'faGithub']
+                        icons: [
+                            'faFacebookF',
+                            'faVk',
+                            'faGoogle',
+                            'faYandex',
+                            'faTwitter',
+                            'faGithub',
+                            'faCcVisa',
+                            'faCcMastercard',
+                            'faPaypal'
+                        ]
                     }
                 ]
             }
