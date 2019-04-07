@@ -3,17 +3,20 @@ export default {
         title: {
             main: 'Free anonymous SOCKS5, HTTP proxy, telegram proxy',
             checker: 'Online free proxy checker',
-            pricing: 'Prices for SOCKS5, HTTP proxy'
+            pricing: 'Prices for SOCKS5, HTTP proxy',
+            checkout: 'Buy FireX Premium'
         },
         description: {
             main: 'Free checked proxy list with SOCKS5 and HTTP proxy. The proxy list is updated every one minute.',
             checker: 'Online free proxy checker',
-            pricing: 'FireX Proxy premium access prices'
+            pricing: 'FireX Proxy premium access prices',
+            checkout: 'FireX Proxy buy premium access'
         },
         keywords: {
             main: 'proxy, free proxy, socks5, http, firex proxy, telegram proxy, fast proxy, anonymous proxy',
             checker: 'proxy, proxy checker, is proxy alive, online proxy checker, socks5, http, firex proxy',
-            pricing: 'proxy, socks5, http, price, premium, firex proxy'
+            pricing: 'proxy, socks5, http, price, premium, firex proxy',
+            checkout: 'proxy, socks5, http, checkout, buy, premium, firex proxy'
         }
     },
     menu: {
@@ -69,8 +72,6 @@ export default {
             gateway: 'Payment gateway',
             details: {
                 title: 'Checkout details',
-                price: '$2',
-                discount: '$0',
                 premium: {
                     name: 'FireX Premium',
                     description: 'Premium access for FireX Proxy'

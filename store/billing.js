@@ -4,7 +4,7 @@ export const CURRENCY_USD = 'USD';
 export const state = () => ({
     currency: CURRENCY_RUB,
     gateway: '',
-    redirectTo: ''
+    redirectTo: {}
 });
 
 export const actions = {
@@ -15,7 +15,7 @@ export const actions = {
             .then(response => {
                 const { redirect_to: redirectTo } = response;
 
-                commit('setRedirectTo', redirectTo);
+                commit('setRedirectTo', { [currency]: redirectTo });
 
                 return redirectTo;
             })
@@ -30,6 +30,6 @@ export const mutations = {
         state.gateway = gateway;
     },
     setRedirectTo(state, redirectTo) {
-        state.redirectTo = redirectTo;
+        state.redirectTo = { ...state.redirectTo, ...redirectTo };
     }
 };

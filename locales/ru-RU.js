@@ -3,17 +3,20 @@ export default {
         title: {
             main: 'Прокси для Телеграм, список прокси SOCKS5, HTTP',
             checker: 'Проверка прокси, прокси чекер',
-            pricing: 'Цены на тарифы'
+            pricing: 'Цены на тарифы',
+            checkout: 'Купить FireX Premium'
         },
         description: {
             main: 'Бесплатный список проверенных прокси SOCKS5, HTTP с ежеминутным обновлением',
             checker: 'Беспланая проверка досупности прокси SOCKS5, HTTP',
-            pricing: 'Купить доступ к SOCKS5, HTTP прокси'
+            pricing: 'Купить доступ к SOCKS5, HTTP прокси',
+            checkout: 'Купить доступ к FireX Premium'
         },
         keywords: {
             main: 'прокси, прокси бесплатно, socks5, http, firex proxy, прокси телеграм, быстрые прокси',
             checker: 'прокси, прокси чекер, проверка прокси, доступность прокси, прокси чекер онлайн, проверка прокси онлайн, socks5, http, firex proxy',
-            pricing: 'прокси, тарифы, socks5, цены, премиум, купить, firex proxy'
+            pricing: 'прокси, тарифы, socks5, цены, премиум, купить, firex proxy',
+            checkout: 'прокси, премиум, купить, socks5, firex proxy'
         }
     },
     menu: {
@@ -69,8 +72,6 @@ export default {
             gateway: 'Способ оплаты',
             details: {
                 title: 'Детали покупки',
-                price: '120₽',
-                discount: '0₽',
                 premium: {
                     name: 'FireX Premium',
                     description: 'Премиум доступ для FireX Proxy'
