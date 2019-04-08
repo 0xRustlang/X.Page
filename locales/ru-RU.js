@@ -77,7 +77,7 @@ export default {
                     description: 'Премиум доступ для FireX Proxy'
                 },
                 promo: {
-                    section: 'Промо-код',
+                    section: 'Промокод',
                     redeem: 'Применить'
                 },
                 total: 'Всего',

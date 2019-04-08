@@ -6,28 +6,28 @@
                     <span class="text-muted">{{ $t('pricing.order.details.title') }}</span>
                     <span class="badge badge-secondary badge-pill">1</span>
                 </h4>
-                <ul class="list-group mb-3">
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                <b-list-group class="mb-3">
+                    <b-list-group-item class="d-flex justify-content-between lh-condensed">
                         <b-form-select v-model="currency" :options="currencies"></b-form-select>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                    </b-list-group-item>
+                    <b-list-group-item class="d-flex justify-content-between lh-condensed">
                         <div>
                             <h6 class="my-0">{{ $t('pricing.order.details.premium.name') }}</h6>
                             <small class="text-muted">{{ $t('pricing.order.details.premium.description') }}</small>
                         </div>
-                        <span class="text-muted">{{ prices[currency].price }}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between bg-light">
+                        <span class="text-muted">{{ prices[currency] | currency(currency) }}</span>
+                    </b-list-group-item>
+                    <b-list-group-item class="d-flex justify-content-between lh-condensed">
                         <div class="text-success">
                             <h6 class="my-0">{{ $t('pricing.order.details.promo.section') }}</h6>
                         </div>
-                        <span class="text-success">-{{ prices[currency].discount }}</span>
-                    </li>
-                    <li class="list-group-item d-flex justify-content-between">
+                        <span class="text-success">-{{ 0 | currency(currency) }}</span>
+                    </b-list-group-item>
+                    <b-list-group-item class="d-flex justify-content-between lh-condensed">
                         <span>{{ $t('pricing.order.details.total') }}</span>
-                        <strong>{{ prices[currency].price }}</strong>
-                    </li>
-                </ul>
+                        <strong>{{ prices[currency] | currency(currency) }}</strong>
+                    </b-list-group-item>
+                </b-list-group>
                 <b-input-group>
                     <b-form-input :placeholder="$t('pricing.order.details.promo.section')" disabled></b-form-input>
                     <b-input-group-append>
@@ -52,11 +52,9 @@
                 </b-row>
                 <hr class="my-4">
                 <b-row class="justify-content-center">
-                    <b-col md="4">
-                        <b-link :disabled="hasRedirectTo() === false" :href="redirectGateway" target="_blank" class="btn btn-warning py-3 px-4">
-                            <fa :icon="['fa', 'shopping-cart']"></fa> {{ $t('pricing.order.pay') }}
-                        </b-link>
-                    </b-col>
+                    <b-link :disabled="hasRedirectTo() === false" :href="redirectGateway" target="_blank" class="btn btn-warning py-3 px-4">
+                        <fa :icon="['fa', 'shopping-cart']"></fa> {{ $t('pricing.order.pay') }}
+                    </b-link>
                 </b-row>
             </b-col>
         </b-row>
@@ -120,14 +118,8 @@
                     CURRENCY_USD
                 ],
                 prices: {
-                    [CURRENCY_RUB]: {
-                        price: '120₽',
-                        discount: '0₽'
-                    },
-                    [CURRENCY_USD]: {
-                        price: '$2',
-                        discount: '$0'
-                    }
+                    [CURRENCY_RUB]: 120,
+                    [CURRENCY_USD]: 2
                 }
             }
         },

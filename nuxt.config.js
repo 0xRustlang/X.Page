@@ -31,6 +31,7 @@ module.exports = {
         '@nuxtjs/axios',
         'cookie-universal-nuxt',
         'bootstrap-vue/nuxt',
+        '~modules/currency/index.js',
         [
             'nuxt-fontawesome',
             {
