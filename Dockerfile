@@ -25,6 +25,7 @@ RUN mkdir -p $NODE_WORKDIR
 WORKDIR $NODE_WORKDIR
 
 COPY --from=build-env /usr/src/app/.nuxt $NODE_WORKDIR/.nuxt
+COPY --from=build-env /usr/src/app/modules $NODE_WORKDIR/modules
 COPY --from=build-env /usr/src/app/server.js $NODE_WORKDIR
 COPY --from=build-env /usr/src/app/nuxt.config.js $NODE_WORKDIR
 COPY --from=build-env /usr/src/app/package-lock.json $NODE_WORKDIR
