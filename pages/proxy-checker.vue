@@ -1,29 +1,29 @@
 <template>
     <b-container class="content pt-3">
         <b-container class="shadow-sm p-3 mb-3 bg-white rounded">
-            <h1>{{ $t('checker.title') }}</h1>
-            <h5>{{ $t('checker.description') }}</h5>
+            <h1 class="h5">{{ $t('checker.title') }}</h1>
+            <h3 class="text-muted">{{ $t('checker.description') }}</h3>
             <b-form id="checker" @submit.prevent="onSubmit" class="mt-4">
                 <b-form-row>
-                    <b-col md="7" class="mr-3">
+                    <b-col md="7" class="mr-3 mb-2">
                         <b-form-textarea v-model="text" placeholder="127.0.0.1:443" rows="10" :max-rows="availableQueueSize"></b-form-textarea>
                     </b-col>
                     <b-col md="4">
                         <b-list-group>
-                            <b-list-group-item class="px-0">
-                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.supportProtocols') }}
+                            <b-list-group-item class="px-0 pt-0">
+                                <fa :icon="['fa', 'check']" class="mr-1"></fa> {{ $t('checker.advantages.supportProtocols') }}
                             </b-list-group-item>
                             <b-list-group-item class="px-0">
-                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.detectProtocol') }}
+                                <fa :icon="['fa', 'check']" class="mr-1"></fa> {{ $t('checker.advantages.detectProtocol') }}
                             </b-list-group-item>
                             <b-list-group-item class="px-0">
-                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.highSpeed') }}
+                                <fa :icon="['fa', 'check']" class="mr-1"></fa> {{ $t('checker.advantages.highSpeed') }}
                             </b-list-group-item>
                             <b-list-group-item class="px-0">
-                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.countryDefinition') }}
+                                <fa :icon="['fa', 'check']" class="mr-1"></fa> {{ $t('checker.advantages.countryDefinition') }}
                             </b-list-group-item>
                         </b-list-group>
-                        <b-button class="text-uppercase py-2 px-3" variant="success" @click="copyAlive">
+                        <b-button class="text-uppercase py-2 px-3 mt-2 mb-1" variant="success" @click="copyAlive">
                             {{ $t('checker.copyAlive') }}
                         </b-button>
                     </b-col>
@@ -247,14 +247,19 @@
         }
     }
 
+    h3 {
+        font-size: .8rem;
+    }
+
     .list-group-item {
         border: none;
+        font-size: .8rem;
     }
 
     #checker {
         .btn {
             font-weight: 500;
-            font-size: .70em;
+            font-size: .7rem;
         }
     }
 </style>
