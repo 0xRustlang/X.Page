@@ -44,18 +44,30 @@ export default {
         ping: 'Ping (ms)',
         export: 'Export'
     },
-    proxy: {
-        status: {
-            available: 'Available',
-            unavailable: 'Unavailable',
-            checking: 'Checking'
-        },
-        copyAlive: 'Copy alive'
-    },
     auth: {
         title: 'Log in / Sign up',
         with: 'Log in with',
         logout: 'Logout'
+    },
+    checker: {
+        title: 'Free online service for checking proxy',
+        description: 'High-speed free proxy checking in 5 threads',
+        advantages: {
+            supportProtocols: 'Check HTTP(-s) and SOCKS5 proxy',
+            detectProtocol: 'Automatic detection proxy protocol',
+            highSpeed: 'High-speed checking in 5 threads',
+            countryDefinition: 'Definition of the country'
+        },
+        submit: 'Submit',
+        reset: 'Reset',
+        copyAlive: 'Copy alive',
+        proxy: {
+            status: {
+                available: 'Available',
+                unavailable: 'Unavailable',
+                checking: 'Checking'
+            }
+        }
     },
     pricing: {
         order: {

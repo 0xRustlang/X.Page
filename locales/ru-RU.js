@@ -44,18 +44,30 @@ export default {
         ping: 'Пинг (мс)',
         export: 'Экспорт'
     },
-    proxy: {
-        status: {
-            available: 'Доступен',
-            unavailable: 'Недоступен',
-            checking: 'Проверяется'
-        },
-        copyAlive: 'Скопировать живые'
-    },
     auth: {
         title: 'Вход или регистрация',
         with: 'Вход через',
         logout: 'Выход'
+    },
+    checker: {
+        title: 'Бесплатная проверка прокси онлайн',
+        description: 'Высокоскоростная бесплатная проверка доступности прокси в 5 потоков',
+        advantages: {
+            supportProtocols: 'Проверка HTTP и SOCKS5 прокси',
+            detectProtocol: 'Автоматическое определение протокола',
+            highSpeed: 'Высокая скорость проверки в 5 потоков',
+            countryDefinition: 'Определение страны прокси-сервера'
+        },
+        submit: 'Отправить',
+        reset: 'Очистить',
+        copyAlive: 'Скопировать живые',
+        proxy: {
+            status: {
+                available: 'Доступен',
+                unavailable: 'Недоступен',
+                checking: 'Проверяется'
+            }
+        }
     },
     pricing: {
         order: {

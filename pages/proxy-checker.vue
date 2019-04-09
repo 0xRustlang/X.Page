@@ -1,35 +1,47 @@
 <template>
-    <b-container fluid class="content pt-3">
-        <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
-            <b-row>
-                <b-col>
-                    <b-form inline @paste.prevent="onPaste" @submit.prevent="onAdd(server)" class="m-0">
-                        <b-input-group>
-                            <b-form-input :state="valid" v-model.trim="server" type="text" placeholder="127.0.0.1:8080"></b-form-input>
-                            <b-input-group-append>
-                                <b-btn variant="primary" class="ml-1" type="submit">
-                                    <fa :icon="['fa', 'plus-square']" class="icon-default"></fa>
-                                </b-btn>
-                            </b-input-group-append>
-                        </b-input-group>
-                    </b-form>
-                </b-col>
-                <b-col>
-                    <b-button variant="primary" @click="copyAlive()" class="float-right">
-                        {{ $t('proxy.copyAlive') }}
+    <b-container class="content pt-3">
+        <b-container class="shadow-sm p-3 mb-3 bg-white rounded">
+            <h1>{{ $t('checker.title') }}</h1>
+            <h5>{{ $t('checker.description') }}</h5>
+            <b-form id="checker" @submit.prevent="onSubmit" class="mt-4">
+                <b-form-row>
+                    <b-col md="7" class="mr-3">
+                        <b-form-textarea v-model="text" placeholder="127.0.0.1:443" rows="10" :max-rows="availableQueueSize"></b-form-textarea>
+                    </b-col>
+                    <b-col md="4">
+                        <b-list-group>
+                            <b-list-group-item class="px-0">
+                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.supportProtocols') }}
+                            </b-list-group-item>
+                            <b-list-group-item class="px-0">
+                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.detectProtocol') }}
+                            </b-list-group-item>
+                            <b-list-group-item class="px-0">
+                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.highSpeed') }}
+                            </b-list-group-item>
+                            <b-list-group-item class="px-0">
+                                <fa :icon="['fa', 'check']" class="icon-clicked"></fa> {{ $t('checker.advantages.countryDefinition') }}
+                            </b-list-group-item>
+                        </b-list-group>
+                        <b-button class="text-uppercase py-2 px-3" variant="success" @click="copyAlive">
+                            {{ $t('checker.copyAlive') }}
+                        </b-button>
+                    </b-col>
+                </b-form-row>
+                <b-button-group class="mt-2">
+                    <b-button class="text-uppercase py-2 px-3" type="submit" variant="primary">
+                        {{ $t('checker.submit') }}
                     </b-button>
-                </b-col>
-            </b-row>
+                    <b-button class="text-uppercase py-2 px-3" type="reset" variant="danger">
+                        {{ $t('checker.reset') }}
+                    </b-button>
+                </b-button-group>
+            </b-form>
         </b-container>
         <b-container fluid class="shadow-sm p-3 mb-3 bg-white rounded">
             <b-row>
-                <b-table :busy.sync="proxies.length === 0"
-                         :items="proxies"
-                         :fields="fields"
-                         responsive>
-                    <template slot="index" slot-scope="data">
-                        {{ data.index + 1 }}
-                    </template>
+                <b-table :busy.sync="proxies.length === 0" :items="proxies" :fields="fields" responsive>
+                    <template slot="index" slot-scope="data">{{ data.index + 1 }}</template>
                     <template slot="country" slot-scope="data">
                         <no-ssr>
                             <flag :iso="data.item.isoCode" :squared="false"></flag>
@@ -38,23 +50,19 @@
                     </template>
                     <template slot="export" slot-scope="data">
                         <copy-button-component :copy-string="`${data.item.server}:${data.item.port}`"></copy-button-component>
-                        <a :href="'tg://socks?server=${data.item.server}&port=${data.item.port}'"
-                           target="_blank"
-                           class="btn btn-primary"
-                           variant="primary"
-                           v-if="data.item.protocol.startsWith('SOCKS')">
+                        <a :href="'tg://socks?server=${data.item.server}&port=${data.item.port}'" target="_blank" class="btn btn-primary" variant="primary" v-if="data.item.protocol.startsWith('SOCKS')">
                             <fa :icon="['fa', 'paper-plane']" class="icon-default"></fa>
                         </a>
                     </template>
                     <template slot="status" slot-scope="data">
                         <b-badge variant="success" v-if="data.item.lossRatio < 1">
-                            {{ $t('proxy.status.available') }}
+                            {{ $t('checker.proxy.status.available') }}
                         </b-badge>
                         <b-badge variant="danger" v-else-if="data.item.lossRatio === 1 && data.item.counter === 2">
-                            {{ $t('proxy.status.unavailable') }}
+                            {{ $t('checker.proxy.status.unavailable') }}
                         </b-badge>
                         <b-badge variant="warning" v-else>
-                            {{ $t('proxy.status.checking') }}
+                            {{ $t('checker.proxy.status.checking') }}
                         </b-badge>
                     </template>
                 </b-table>
@@ -89,7 +97,7 @@
         },
         data() {
             return {
-                server: '',
+                text: '',
                 proxies: [],
                 fields: [
                     {
@@ -139,24 +147,13 @@
                 ]
             }
         },
-        computed: {
-            valid() {
-                return this.server.length === 0 || this.checkServer(this.server);
-            }
-        },
         methods: {
-            onPaste(e) {
-                const clipboard = (e.originalEvent || e)
-                    .clipboardData
-                    .getData('text/plain')
-                    .split('\n');
-
-                const data = clipboard
+            onSubmit() {
+                const data = this.text
+                    .split('\n')
                     .filter(this.checkServer.bind(this))
                     .slice(0, this.availableQueueSize())
                     .map(v => this.create(...v.split(':')));
-
-                this.server = clipboard.find(s => this.checkServer(s) === false) || '';
 
                 this.proxies.push(...data);
                 this.ws.send(JSON.stringify(data));
@@ -168,18 +165,6 @@
                 const [server, port] = newServer.split(':');
 
                 return !this.proxies.some(proxy => proxy.server === server && proxy.port === port);
-            },
-            onAdd(newServer) {
-                if (newServer.length === 0 || !this.checkServer(newServer) || this.proxies.length === MAX_QUEUE_SIZE) {
-                    return;
-                }
-
-                const proxy = this.create(...newServer.split(':'));
-
-                this.proxies.push(proxy);
-                this.ws.send(JSON.stringify([proxy]));
-
-                this.server = '';
             },
             availableQueueSize() {
                 return MAX_QUEUE_SIZE - this.proxies.filter(v => v.counter < 2).length;
@@ -251,7 +236,7 @@
     }
 </script>
 
-<style lang="scss">
+<style lang="scss" scoped>
     .table {
         tr {
             &:first-of-type {
@@ -259,6 +244,17 @@
                     border-top: none;
                 }
             }
+        }
+    }
+
+    .list-group-item {
+        border: none;
+    }
+
+    #checker {
+        .btn {
+            font-weight: 500;
+            font-size: .70em;
         }
     }
 </style>
